@@ -6,17 +6,13 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hexo</title>
+  <title>Tag: Map接口的特点 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="小白实现双向链表需要注意的事项直接上代码：#include &lt;stdio.h&gt; #include &lt;stdlib.h&gt;   &#x2F;&#x2F; 定义双向链表节点结构 struct Node {     int data; &#x2F;&#x2F; 节点数据     struct Node* next; &#x2F;&#x2F; 指向下一个节点的指针     struc">
-<meta property="og:type" content="article">
+  <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/2024/09/938fe7e3f906.html">
+<meta property="og:url" content="http://example.com/tags/Map%E6%8E%A5%E5%8F%A3%E7%9A%84%E7%89%B9%E7%82%B9/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="小白实现双向链表需要注意的事项直接上代码：#include &lt;stdio.h&gt; #include &lt;stdlib.h&gt;   &#x2F;&#x2F; 定义双向链表节点结构 struct Node {     int data; &#x2F;&#x2F; 节点数据     struct Node* next; &#x2F;&#x2F; 指向下一个节点的指针     struc">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-09-29T03:58:24.497Z">
-<meta property="article:modified_time" content="2024-11-23T11:55:29.902Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -154,201 +150,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-指针的学习" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
+            
+  
+  
     
-    <div class="article-entry" itemprop="articleBody">
+    
       
-        <p>小白实现双向链表需要注意的事项<br>直接上代码：<br>#include &lt;stdio.h&gt;</p>
-<p>#include &lt;stdlib.h&gt;</p>
-<p>  &#x2F;&#x2F; 定义双向链表节点结构</p>
-<p>struct Node {</p>
-<p>    int data; &#x2F;&#x2F; 节点数据</p>
-<p>    struct Node* next; &#x2F;&#x2F; 指向下一个节点的指针</p>
-<p>    struct Node* prev; &#x2F;&#x2F; 指向上一个节点的指针</p>
-<p>};</p>
-<p>&#x2F;&#x2F; 创建一个新节点</p>
-<p>struct Node* createNode(int data) {</p>
-<p>    struct Node* newNode &#x3D; (struct Node*)malloc(sizeof(struct Node)); &#x2F;&#x2F; 动态分配内存</p>
-<p>    newNode-&gt;data &#x3D; data;     &#x2F;&#x2F; 设置节点数据</p>
-<p>    newNode-&gt;next &#x3D; NULL;     &#x2F;&#x2F; 初始化next指针为NULL</p>
-<p>    newNode-&gt;prev &#x3D; NULL;     &#x2F;&#x2F; 初始化prev指针为NULL</p>
-<p>    return newNode;           &#x2F;&#x2F; 返回新节点</p>
-<p>}</p>
-<p>  &#x2F;&#x2F; 向链表末尾添加节点</p>
-<p>void append(struct Node** head_ref, int new_data) {</p>
-<p>    struct Node* new_node &#x3D; createNode(new_data); &#x2F;&#x2F; 创建新节点</p>
-<p>    struct Node* last &#x3D; *head_ref; &#x2F;&#x2F; 初始化last节点为头节点</p>
-<p>    if (*head_ref &#x3D;&#x3D; NULL) { &#x2F;&#x2F; 如果链表为空</p>
-<p>        *head_ref &#x3D; new_node; &#x2F;&#x2F; 新节点为头节点</p>
-<p>        return;</p>
-<p>    }</p>
-<p>      while (last-&gt;next !&#x3D; NULL) &#x2F;&#x2F; 遍历到链表末尾</p>
-<p>        last &#x3D; last-&gt;next;</p>
-<p>    last-&gt;next &#x3D; new_node; &#x2F;&#x2F; 将新节点添加到链表末尾</p>
-<p>    new_node-&gt;prev &#x3D; last; &#x2F;&#x2F; 设置新节点的prev指针</p>
-<p>}</p>
-<p>&#x2F;&#x2F; 打印链表</p>
-<p>void printList(struct Node* node) {</p>
-<p>     struct Node* last;</p>
-<p>    printf(“Traversal in forward direction:\n”);</p>
-<p>    while (node !&#x3D; NULL) { &#x2F;&#x2F; 从头到尾遍历链表</p>
-<p>        printf(“%d “, node-&gt;data);</p>
-<p>         last &#x3D; node; &#x2F;&#x2F; 记录当前节点</p>
-<p>        node &#x3D; node-&gt;next; &#x2F;&#x2F; 移动到下一个节点</p>
-<p>    }</p>
-<p>    printf(“\n”);</p>
-<p>}</p>
-<p>int main() {</p>
-<p>    struct Node* head &#x3D; NULL; &#x2F;&#x2F; 初始化头节点为NULL</p>
-<p>    append(&amp;head, 1);</p>
-<p>    append(&amp;head, 2);</p>
-<p>    append(&amp;head, 3);</p>
-<p>    append(&amp;head, 4);</p>
-<p>    printList(head); &#x2F;&#x2F; 打印链表</p>
-<p>    return 0;</p>
-<p>}</p>
-<p>为什么添加节点一定要用二级指针，不能用一级指针？<br>    我个人的理解是：head作为头结点，它也是指针，指针存放的就是地址，当然它本身也有地址，如果你不把指针的地址传给二级指针的话，那么每次调用append这个函数的时候，那么head永远给append的函数传的NULL，你永远都改变不了head的值，“&amp;”这个是地址运算符，只有&amp;head才是取head的地址，而如果传一个head给函数，那么只是把head指向的内容告诉了你。</p>
-<p>这个结点存放的是一个数据域和两个指针域，数据域才是用户需要的数据，指针域是指向上一个结点或下一个结点，链表一定是从头结点开始的，如果你没有头结点，你就会找不到这个链表，逻辑上也是说不通的。</p>
-<p>有人说c语言不是高级语言是中级语言，我觉得这个是说不通的，众所周知Java是面向对象的语言，而c语言是面向过程的语言，不过c语言其实也是有对象，而且很多功能都可以实现，c语言的对象，叫做数据对象，数据对象可以静态实现和动态实现，我们这个例子中用的是malloc动态链表，调用对象不就是调用地址嘛，所以这里的对象很显然就是head结点开始，不要被结点这种名字给弄晕了，链表作为数据结构，它把对象都存在到了结点里，结点是怎么定义的，不就是结构体嘛，由结构体产生对象，然后每一个结点存放下一个结点的地址，以及下一个结点存放前一个结点的地址，然后就形成了双向链表，数据元素指的是数据对象内部的具体值，在这个代码中，p-&gt;data就是数据元素，数据项是最小单位，数据项就是对象中的一个字段或属性，在个代码中就是data，像那些出书的人总是喜欢玩文字游戏，所谓的面向过程，这个过程其实说的就是函数，你看看上面的代码，结点的创建是用结构体，对象的创建是用的函数，对象的空间是用malloc函数开辟，有感受到割裂感了嘛，面向对象就不那么做了，直接把属性和函数全部放在一起，形成一个新的数据结构，就是“类”，以类为模版创建对象，Java是纯面向对象的语言，但又不是那么纯，毕竟Java有自动装箱和拆箱的功能，这个是编译器自动处理的，面向对象对事物的描述更加准确，我定义一个结点类，就能就能实现所见即所得了吧，面向过程的话，它把数据的定义和函数给分开了，还要说一句的是万事万物皆是数据，我们说的数据，和你想的可能是不一样的，我们说的数据那个范围是非常广的，不仅限于数字123，数据结构不正是存放数据的容器嘛，而链表和顺序表是最基础的，是一对一的关系，通过这个数据结构，我们可以推广出更复杂的数据结构。<br>上面的代码量非常少，只是创建了链表，然后插入了之后，再显示出来，是非常简答的，只是有的人C语言不好的人，看起来会有压力，多看几遍就行了，比如像这个函数定义“struct Node createNode(int data) ”，是不是看起来很奇怪，它其实是定义了一个struct Node类型的函数，函数名叫做createNode，参数是int data，即返回值是一个指针，这个需要和指针变量区分一下，指针变量的话，可以加个括号，函数指针变量就是接收其他函数的地址，然后实现钩子函数，就是类似面向对象语言中的多态，就是不同的对象，会产生不同的行为，也就产生了多态，钩子函数也可以叫事物处理函数，就是你传什么函数的指针，我就执行什么，还有编译器的话其实只认参数的声明，参数名其实并不是最重要，主要是给我们人看的，现在不是流行语义化了嘛，我想就是这个道理，暂时先说这么多吧。</p>
-
       
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2024" class="archive-year">2024</a>
         </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2024/11/2360219f8ca5.html" class="archive-article-date">
+  	<time datetime="2024-11-23T13:00:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-11-23</time>
+</a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2024/11/2360219f8ca5.html">Java集合-Map接口(key-value)</a>
+    </h1>
+  
 
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2024/09/938fe7e3f906.html" alt="微信分享二维码">
-    </div>
-</div>
+        <div class="article-info info-on-right">
+          
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Map接口的特点</a>
+        		</li>
+      		
+		</ul>
+	</div>
 
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+          
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2024/09/eef2b66eb501.html" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          笔记
-        
-      </div>
-    </a>
   
   
-    <a href="/2024/09/32bbbb231ba2.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Java基本数据类型和结构化程序设计</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -371,9 +226,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
@@ -441,14 +296,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">什么是Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">基本操作</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">概念</a>
               </li>
              
@@ -469,23 +316,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">什么是Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">基本操作</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">List集合的特点</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">主要方法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">什么是代理模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">静态代理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">动态代理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -517,23 +360,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">什么是代理模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">静态代理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">动态代理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Map接口的特点</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">基本数据类型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">结构化程序设计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">TCP网络模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -546,6 +393,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">I/O多路复用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">TCP网络模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
             
             <div class="clearfix"></div>

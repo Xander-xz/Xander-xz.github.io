@@ -152,6 +152,336 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Java集合-Map接口-key-value" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/11/2360219f8ca5.html">Java集合-Map接口(key-value)</a>
+    </h1>
+  
+
+        
+        <a href="/2024/11/2360219f8ca5.html" class="archive-article-date">
+  	<time datetime="2024-11-23T13:00:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-11-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Map接口的特点：①KV键值对方式存储②Key键唯一，Value允许重复③无序。</p>
+<p>Map有四个实现类：1.HashMap类2.LinkedHashMap类3.TreeMap类4.Hashtable类</p>
+<p>1.HashMap类：<br>存储结构：哈希表 &#x3D; 数组Node  + 链表（红黑树）</p>
+<p>扩容方法：resize()</p>
+<p>扩容机制：原数组的2倍</p>
+<p>特点：①Key唯一，不允许重复②Value允许重复③无序</p>
+<p>HashMap: KV键值对集合，key唯一，value允许重复<br>put()方法:添加键值对，如果key不存在，则返回null; 如果key存在，则保存新value,返回旧<br>value<br>get()方法:根据key,获取value，如果key存在，获取该元素的键值对的value值;如果不存在，<br>则获取该元素的键值对的value值为null;如果返回的value为null, 类型转换时，会发生空指针</p>
+<p>public static void main(String args) {</p>
+<pre><code>    // Map键值对集合
+    //保存城市人口信息
+    // key :城市名称.
+    // val:人口数量
+    HashMap&lt;String,Integer&gt; map = new HashMap&lt;String,Integer&gt;();
+    map.put(&quot;X咸阳&quot;,1100);
+    
+    HashMap&lt;String,Integer&gt; anotherMap = new HashMap&lt;String,Integer&gt;();
+    anotherMap.put(&quot;B北京&quot;, 2500);
+    anotherMap.put(&quot;C长春&quot;, 300);
+    anotherMap.put(&quot;D大连&quot;, 1000);
+    map.putAll(anotherMap);
+    anotherMap.put(&quot;D大连&quot;, 1000);  //key不允许重复
+    map.put(&quot;E鄂尔多斯&quot;, 1000);//value不允许重复
+    
+    System.out.println(map);
+
+&#125;
+</code></pre>
+<p>输出：</p>
+<p>{D大连&#x3D;1000, E鄂尔多斯&#x3D;1000, C长春&#x3D;300, B北京&#x3D;2500, X咸阳&#x3D;1100}<br>put()与get()方法：</p>
+<p>public static void main(String args) {<br>    HashMap&lt;String,Integer&gt; cityMap &#x3D; new HashMap&lt;String,Integer&gt;();</p>
+<pre><code>//put()方法：添加键值对
+//如果key不存在，则返回null
+System.out.println(cityMap.put(&quot;X西安&quot;, 1100));
+System.out.println(cityMap.put(&quot;B北京&quot;, 2500));
+System.out.println(cityMap.put(&quot;C长春&quot;, 300));
+System.out.println(cityMap.put(&quot;D大连&quot;, 1000));
+//如果key存在，则保存新value,返回旧value
+System.out.println(cityMap.put(&quot;X西安&quot;, 1200));
+
+//get()方法：根据Key值，获取value
+//key存在
+int value1 = cityMap.get(&quot;B北京&quot;);
+System.out.println(&quot;B北京===&gt;&quot;+value1);
+
+//key不存在
+Integer value2 = cityMap.get(&quot;N南京&quot;);
+System.out.println(&quot;N南京&quot;+value2);
+
+//如果返回的value为null,类型转换时，会发生空指针
+int value3 = cityMap.get(&quot;N南京&quot;);
+&#125;
+</code></pre>
+<p> 输出：</p>
+<p>null<br>null<br>null<br>null<br>1100<br>B北京&#x3D;&#x3D;&#x3D;&gt;2500<br>N南京null<br>Exception in thread “main” java.lang.NullPointerException<br>    at com.zad.day24_1_26_01.Text08.main(Text08.java:28)<br>遍历map:</p>
+<p>遍历Map<br>方式1:获取所有的key,然后按照每个key获取对应的value<br>方式2:获取所有的value<br>方式3:将每个KV键值对按照Entry类型的对象，统一获取</p>
+<p>方式1 :获取所有的key,然后按照每个key获取对应的value</p>
+<p>public static void main(String args) {<br>        HashMap&lt;String,String&gt; map &#x3D; new HashMap&lt;String,String&gt;();</p>
+<pre><code>    map.put(&quot;华语&quot;, new String[] &#123; &quot;林俊杰&quot;, &quot;陈奕迅&quot;, &quot;邓紫棋&quot;, &quot;薛之谦&quot;, &quot;汪苏泷&quot;, &quot;李荣浩&quot; &#125;);
+    map.put(&quot;欧美&quot;, new String[] &#123; &quot;贾斯丁比伯&quot;, &quot;威肯&quot;, &quot;艾兰沃克&quot;, &quot;德雷克&quot; &#125;);
+    map.put(&quot;乐队&quot;, new String[] &#123; &quot;魔力红&quot;, &quot;烟鬼组合&quot;, &quot;共和时代&quot;, &quot;辅音组合&quot;, &quot;Linkin Park&quot;, &quot;Westlife&quot; &#125;);
+    
+    //遍历Map
+    //方式1：获取所有的key,然后按照每个key获取对应的value
+    Set&lt;String&gt; keys = map.keySet();//获取map中所有的key
+    
+    System.out.println(&quot;所有的key:&quot;+keys);
+    System.out.println(&quot;按照每个key,获取对应的value&quot;);
+    
+    Iterator&lt;String&gt; it = keys.iterator();
+    while(it.hasNext()) &#123;
+        String key = it.next();//获取每个key
+        String[] val = map.get(key);//按照key获取对应的value
+        System.out.printf(&quot;%s ---&gt; %s  \n&quot;,key,Arrays.toString(val));	
+    &#125;
+    
+    
+    
+&#125;
+</code></pre>
+<p>输出：</p>
+<p>所有的key:华语, 乐队, 欧美<br>按照每个key,获取对应的value<br>华语 —&gt; 林俊杰, 陈奕迅, 邓紫棋, 薛之谦, 汪苏泷, 李荣浩<br>乐队 —&gt; 魔力红, 烟鬼组合, 共和时代, 辅音组合, Linkin Park, Westlife<br>欧美 —&gt; 贾斯丁比伯, 威肯, 艾兰沃克, 德雷克<br>方式2：获取所有的value</p>
+<p>public static void main(String args) {<br>        HashMap&lt;String,String&gt; map &#x3D; new HashMap&lt;String,String&gt;();</p>
+<pre><code>    map.put(&quot;华语&quot;, new String[] &#123; &quot;林俊杰&quot;, &quot;陈奕迅&quot;, &quot;邓紫棋&quot;, &quot;薛之谦&quot;, &quot;汪苏泷&quot;, &quot;李荣浩&quot; &#125;);
+    map.put(&quot;欧美&quot;, new String[] &#123; &quot;贾斯丁比伯&quot;, &quot;威肯&quot;, &quot;艾兰沃克&quot;, &quot;德雷克&quot; &#125;);
+    map.put(&quot;乐队&quot;, new String[] &#123; &quot;魔力红&quot;, &quot;烟鬼组合&quot;, &quot;共和时代&quot;, &quot;辅音组合&quot;, &quot;Linkin Park&quot;, &quot;Westlife&quot; &#125;);
+    
+    //遍历map
+    //方式2：获取所有的value
+    Collection&lt;String[]&gt; values=map.values();
+    for(String[] array:values) &#123;
+        System.out.println(Arrays.toString(array));
+    &#125;
+
+    
+&#125;
+</code></pre>
+<p>输出：</p>
+<p>林俊杰, 陈奕迅, 邓紫棋, 薛之谦, 汪苏泷, 李荣浩<br>魔力红, 烟鬼组合, 共和时代, 辅音组合, Linkin Park, Westlife<br>贾斯丁比伯, 威肯, 艾兰沃克, 德雷克<br> 方式3：将每个KV键值对按照Entry类型的对象，统一获取</p>
+<p>public static void main(String args) {<br>        HashMap&lt;String, String&gt; map &#x3D; new HashMap&lt;String, String&gt;();</p>
+<pre><code>    map.put(&quot;华语&quot;, new String[] &#123; &quot;林俊杰&quot;, &quot;陈奕迅&quot;, &quot;邓紫棋&quot;, &quot;薛之谦&quot;, &quot;汪苏泷&quot;, &quot;李荣浩&quot; &#125;);
+    map.put(&quot;欧美&quot;, new String[] &#123; &quot;贾斯丁比伯&quot;, &quot;威肯&quot;, &quot;艾兰沃克&quot;, &quot;德雷克&quot; &#125;);
+    map.put(&quot;乐队&quot;, new String[] &#123; &quot;魔力红&quot;, &quot;烟鬼组合&quot;, &quot;共和时代&quot;, &quot;辅音组合&quot;, &quot;Linkin Park&quot;, &quot;Westlife&quot; &#125;);
+    
+    //遍历Map
+    //方式3：将每个KV键值对按照Entry类型的对象，统一获取
+    Set&lt;Entry&lt;String,String[]&gt;&gt; entrys = map.entrySet();
+    for(Entry&lt;String,String[]&gt;  keyValue:entrys) &#123;
+        System.out.printf(&quot;%s---&gt;%s\n&quot;,keyValue.getKey(),Arrays.toString(keyValue.getValue()));
+    &#125;
+&#125;
+</code></pre>
+<p> 输出：</p>
+<p>华语—&gt;林俊杰, 陈奕迅, 邓紫棋, 薛之谦, 汪苏泷, 李荣浩<br>乐队—&gt;魔力红, 烟鬼组合, 共和时代, 辅音组合, Linkin Park, Westlife<br>欧美—&gt;贾斯丁比伯, 威肯, 艾兰沃克, 德雷克<br>常用方法：</p>
+<p>判断key是否存在: containsKey()方法<br>根据key获取value,如果key不存在，则返回default默认值: getOrDefault()方法<br>根据key,删除KV键值对:remove()方法<br>获取键值对的数量:size()方法<br>public static void main(String args) {<br>        &#x2F;&#x2F;歌手分类<br>        HashMap&lt;String, String&gt; map&#x3D;new HashMap&lt;String, String&gt;();</p>
+<pre><code>    map.put(&quot;华语&quot;, new String[] &#123; &quot;林俊杰&quot;, &quot;陈奕迅&quot;, &quot;邓紫棋&quot;, &quot;薛之谦&quot;, &quot;汪苏泷&quot;, &quot;李荣浩&quot; &#125;);
+    map.put(&quot;欧美&quot;, new String[] &#123; &quot;贾斯丁比伯&quot;, &quot;威肯&quot;, &quot;艾兰沃克&quot;, &quot;德雷克&quot; &#125;);
+    map.put(&quot;乐队&quot;, new String[] &#123; &quot;魔力红&quot;, &quot;烟鬼组合&quot;, &quot;共和时代&quot;, &quot;辅音组合&quot;, &quot;Linkin Park&quot;, &quot;Westlife&quot; &#125;);
+    
+    //判断key是否存在
+    boolean isContains = map.containsKey(&quot;日韩&quot;);
+    System.out.println(isContains);
+    
+    //根据key获取value，如果key不存在，则返回default默认值
+    String[] value = map.getOrDefault(&quot;日韩&quot;, new String[] &#123;&#125;);
+    System.out.println(Arrays.toString(value));
+    
+    //根据key，删除KV键值对
+    map.remove(&quot;欧美&quot;);
+    System.out.println(map);
+    
+    //获取键值对的数量
+    int size = map.size();
+    System.out.println(size);
+&#125;
+</code></pre>
+<p> 输出：</p>
+<p>false</p>
+<p>{华语&#x3D;Ljava.lang.String;@3d8c7aca, 乐队&#x3D;Ljava.lang.String;@5ebec15}<br>2<br> 应用例：统计英文字母、中文、数字、标点符号的个数</p>
+<p>public static void main(String args) {<br>        &#x2F;&#x2F;统计英文字母、中文、数字、标点符号的个数<br>        String str &#x3D; “OMG,你们的中英混搭真是各有千秋,但Someone丝毫掩盖不了你们那硬朗的英语底子！For eg.papi酱真的very有才华啊，哦买噶的，U6666666!!!罢特，someone也是成功地掩盖了自己小学程度的英语水平!这样式的，I是不会use的，because l hate 这种人very much~”;</p>
+<pre><code>    //统计结果，保存到map中
+    HashMap&lt;String, Integer&gt; map = new HashMap&lt;String, Integer&gt;();
+</code></pre>
+<p>&#x2F;&#x2F;		map.put(“letters”, 0);<br>&#x2F;&#x2F;		map.put(“numbers”, 0);<br>&#x2F;&#x2F;		map.put(“chinese”, 0);<br>&#x2F;&#x2F;		map.put(“flags”, 0);</p>
+<pre><code>    // 遍历字符串，判断每个字符
+    for (int i = 0; i &lt; str.length(); i++) &#123;
+        // 获取每一个字符
+        char c = str.charAt(i);
+
+        if (c &gt;= &#39;A&#39; &amp;&amp; c &lt; &#39;Z&#39; || c &gt; &#39;a&#39; &amp;&amp; c &lt; &#39;z&#39;) &#123;
+            //获取一个字符
+            int oldValue = map.getOrDefault(&quot;letters&quot;, 0);
+            int newValue = oldValue + 1;
+            map.put(&quot;letters&quot;, newValue);
+        &#125; else if (c &gt; &#39;0&#39; &amp;&amp; c &lt; &#39;9&#39;) &#123;
+            map.put(&quot;numbers&quot;, map.getOrDefault(&quot;numbers&quot;, 0)+1);
+        &#125; else if (c &gt;= 0x4e00 &amp;&amp; c &lt;= 0x29fa5) &#123;
+            map.put(&quot;chinese&quot;, map.getOrDefault(&quot;chinese&quot;, 0) + 1);
+        &#125; else &#123;
+            map.put(&quot;flags&quot;, map.getOrDefault(&quot;flags&quot;, 0)+ 1);
+        &#125;
+    &#125;
+    System.out.println(map);
+
+&#125;
+</code></pre>
+<p>输出：</p>
+<p>{chinese&#x3D;79, flags&#x3D;16, numbers&#x3D;7, letters&#x3D;52}<br>2.LinkedHashMap类：<br>存储结构：数组+链表+红黑树，，维护使用链表，记录顺序</p>
+<p>特点：①Key唯一，不允许重复②Value允许重复③有序④LinkedHashMap是HashMap的子类</p>
+<p> 应用例:统计每个字符出现的次数</p>
+<p>public static void main(String args) {<br>        &#x2F;&#x2F;统计每个字符出现的次数<br>        &#x2F;&#x2F;无序<br>        String str &#x3D; “qurfkjcbsdjqpiurfufhdvlajydfgquyvhvaljhvqouygqhvhv”;<br>&#x2F;&#x2F;		HashMap&lt;String,Integer&gt; map1 &#x3D; new HashMap&lt;String, Integer&gt;();<br>        &#x2F;&#x2F;有序<br>        LinkedHashMap&lt;String,Integer&gt; map2 &#x3D; new LinkedHashMap&lt;String, Integer&gt;();</p>
+<pre><code>    for(int i = 0;i&lt;str.length();i++) &#123;
+        String key = str.substring(i,i+1);
+        
+        //判断key是否存在
+        if(map2.containsKey(key)) &#123;
+            //该字符(key)存在
+            map2.put(key, map2.get(key)+1);
+        &#125;else &#123;
+            //该字符不存在
+            map2.put(key, 1);
+        &#125;
+    &#125;
+    System.out.println(map2);
+    
+    
+&#125;
+</code></pre>
+<p> 输出：</p>
+<p>{q&#x3D;5, u&#x3D;5, r&#x3D;2, f&#x3D;4, k&#x3D;1, j&#x3D;4, c&#x3D;1, b&#x3D;1, s&#x3D;1, d&#x3D;3, p&#x3D;1, i&#x3D;1, h&#x3D;5, v&#x3D;6, l&#x3D;2, a&#x3D;2, y&#x3D;3, g&#x3D;2, o&#x3D;1}<br>3.TreeMap类：<br>特点：①Key唯一，不允许重复②Value允许重复③按照Key自动排序④AbstractMap的子类</p>
+<p>存储结构：树中的每个节点均是Entry内部类对象（红黑树）</p>
+<p>例：按照key自动排序，通过key进行比较后排序！！！</p>
+<p>public static void main(String args) {<br>        &#x2F;&#x2F;HashMap:无序，按照key计算保存位置<br>        &#x2F;&#x2F;HashMap&lt;String,String&gt; map &#x3D; new HashMap&lt;String,String&gt;();</p>
+<pre><code>    // TreeMap:按照key自动排序，通过key进行比较后排序
+    TreeMap&lt;String, String&gt; map = new TreeMap&lt;String, String&gt;();
+
+    map.put(&quot;SN201&quot;, &quot;A1&quot;);
+    map.put(&quot;SN111&quot;, &quot;A2&quot;);
+    map.put(&quot;SN107&quot;, &quot;A3&quot;);
+    map.put(&quot;SN191&quot;, &quot;A4&quot;);
+    map.put(&quot;SN100&quot;, &quot;A5&quot;);
+    map.put(&quot;SN103&quot;, &quot;A6&quot;);
+    map.put(&quot;SN2011&quot;, &quot;A7&quot;);
+    map.put(&quot;SN1031&quot;, &quot;A8&quot;);
+    map.put(&quot;SN1231&quot;, &quot;A9&quot;);
+
+    for (Entry&lt;String, String&gt; entry : map.entrySet()) &#123;
+        System.out.println(entry.getKey() + &quot;:&quot; + entry.getValue());
+    &#125;
+&#125;
+</code></pre>
+<p> 输出：</p>
+<p>SN100:A5<br>SN103:A6<br>SN1031:A8<br>SN107:A3<br>SN111:A2<br>SN1231:A9<br>SN191:A4<br>SN201:A1<br>SN2011:A7<br> 调用TreeMap&lt;&gt;()的有参构造方法，重写compare()方法，按照大小排序</p>
+<p>public static void main(String args) {<br>        &#x2F;&#x2F;HashMap:无序，按照key计算保存位置<br>        &#x2F;&#x2F;HashMap&lt;String,String&gt; map &#x3D; new HashMap&lt;String,String&gt;();</p>
+<pre><code>    // TreeMap:按照key自动排序，通过key进行比较后排序
+    TreeMap&lt;String, String&gt; map = new TreeMap&lt;String, String&gt;(new Comparator&lt;String&gt;() &#123;
+
+        @Override
+        public int compare(String o1, String o2) &#123;
+            int n1 = Integer.parseInt(o1.substring(2));
+            int n2 = Integer.parseInt(o2.substring(2));
+
+            return n1 - n2;
+        &#125;
+    &#125;);
+
+    map.put(&quot;SN201&quot;, &quot;A1&quot;);
+    map.put(&quot;SN111&quot;, &quot;A2&quot;);
+    map.put(&quot;SN107&quot;, &quot;A3&quot;);
+    map.put(&quot;SN191&quot;, &quot;A4&quot;);
+    map.put(&quot;SN100&quot;, &quot;A5&quot;);
+    map.put(&quot;SN103&quot;, &quot;A6&quot;);
+    map.put(&quot;SN2011&quot;, &quot;A7&quot;);
+    map.put(&quot;SN1031&quot;, &quot;A8&quot;);
+    map.put(&quot;SN1231&quot;, &quot;A9&quot;);
+
+    for (Entry&lt;String, String&gt; entry : map.entrySet()) &#123;
+        System.out.println(entry.getKey() + &quot;:&quot; + entry.getValue());
+    &#125;
+&#125;
+</code></pre>
+<p>输出：</p>
+<p>SN100:A5<br>SN103:A6<br>SN107:A3<br>SN111:A2<br>SN191:A4<br>SN201:A1<br>SN1031:A8<br>SN1231:A9<br>SN2011:A7<br>4.Hashtable类<br>特点：①Key唯一，不允许重复②Value允许重复③key 和 value不允许为空，如果为null，则抛出NullPointerExceptino④线程安全，使用synchronized加锁，性能较差</p>
+<p>存储结构：数组+链表</p>
+<p>允许使用null做key<br>不允许使用null做value<br>public static void main(String args) {</p>
+<pre><code>    HashMap&lt;String, String&gt; map=new HashMap&lt;String, String&gt;();
+    map.put(null, &quot;巴黎世家&quot;);//不允许使用null做key
+    map.put(&quot;AAA&quot;, null);//允许使用null做value
+    System.out.println(map);
+    
+    Hashtable&lt;String, String&gt; table=new Hashtable&lt;String, String&gt;();
+    table.put(null, &quot;巴黎世家&quot;);//不允许使用null做key
+    table.put(&quot;AAA&quot;, null);//不允许使用null做value
+    System.out.println(table);
+    &#125;
+</code></pre>
+<p>输出：</p>
+<p>{null&#x3D;巴黎世家, AAA&#x3D;null}<br>Exception in thread “main” java.lang.NullPointerException<br>    at java.util.Hashtable.put(Hashtable.java:465)<br>    at com.zad.day24_1_26_01.Text15.main(Text15.java:15)</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Map接口的特点</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/11/2360219f8ca5.html">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-IO流" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1484,105 +1814,6 @@ public Object invoke(Object proxy, Method method, Object[] args) throws Throwabl
 
 
   
-    <article id="post-指针的学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>小白实现双向链表需要注意的事项<br>直接上代码：<br>#include &lt;stdio.h&gt;</p>
-<p>#include &lt;stdlib.h&gt;</p>
-<p>  &#x2F;&#x2F; 定义双向链表节点结构</p>
-<p>struct Node {</p>
-<p>    int data; &#x2F;&#x2F; 节点数据</p>
-<p>    struct Node* next; &#x2F;&#x2F; 指向下一个节点的指针</p>
-<p>    struct Node* prev; &#x2F;&#x2F; 指向上一个节点的指针</p>
-<p>};</p>
-<p>&#x2F;&#x2F; 创建一个新节点</p>
-<p>struct Node* createNode(int data) {</p>
-<p>    struct Node* newNode &#x3D; (struct Node*)malloc(sizeof(struct Node)); &#x2F;&#x2F; 动态分配内存</p>
-<p>    newNode-&gt;data &#x3D; data;     &#x2F;&#x2F; 设置节点数据</p>
-<p>    newNode-&gt;next &#x3D; NULL;     &#x2F;&#x2F; 初始化next指针为NULL</p>
-<p>    newNode-&gt;prev &#x3D; NULL;     &#x2F;&#x2F; 初始化prev指针为NULL</p>
-<p>    return newNode;           &#x2F;&#x2F; 返回新节点</p>
-<p>}</p>
-<p>  &#x2F;&#x2F; 向链表末尾添加节点</p>
-<p>void append(struct Node** head_ref, int new_data) {</p>
-<p>    struct Node* new_node &#x3D; createNode(new_data); &#x2F;&#x2F; 创建新节点</p>
-<p>    struct Node* last &#x3D; *head_ref; &#x2F;&#x2F; 初始化last节点为头节点</p>
-<p>    if (*head_ref &#x3D;&#x3D; NULL) { &#x2F;&#x2F; 如果链表为空</p>
-<p>        *head_ref &#x3D; new_node; &#x2F;&#x2F; 新节点为头节点</p>
-<p>        return;</p>
-<p>    }</p>
-<p>      while (last-&gt;next !&#x3D; NULL) &#x2F;&#x2F; 遍历到链表末尾</p>
-<p>        last &#x3D; last-&gt;next;</p>
-<p>    last-&gt;next &#x3D; new_node; &#x2F;&#x2F; 将新节点添加到链表末尾</p>
-<p>    new_node-&gt;prev &#x3D; last; &#x2F;&#x2F; 设置新节点的prev指针</p>
-<p>}</p>
-<p>&#x2F;&#x2F; 打印链表</p>
-<p>void printList(struct Node* node) {</p>
-<p>     struct Node* last;</p>
-<p>    printf(“Traversal in forward direction:\n”);</p>
-<p>    while (node !&#x3D; NULL) { &#x2F;&#x2F; 从头到尾遍历链表</p>
-<p>        printf(“%d “, node-&gt;data);</p>
-<p>         last &#x3D; node; &#x2F;&#x2F; 记录当前节点</p>
-<p>        node &#x3D; node-&gt;next; &#x2F;&#x2F; 移动到下一个节点</p>
-<p>    }</p>
-<p>    printf(“\n”);</p>
-<p>}</p>
-<p>int main() {</p>
-<p>    struct Node* head &#x3D; NULL; &#x2F;&#x2F; 初始化头节点为NULL</p>
-<p>    append(&amp;head, 1);</p>
-<p>    append(&amp;head, 2);</p>
-<p>    append(&amp;head, 3);</p>
-<p>    append(&amp;head, 4);</p>
-<p>    printList(head); &#x2F;&#x2F; 打印链表</p>
-<p>    return 0;</p>
-<p>}</p>
-<p>为什么添加节点一定要用二级指针，不能用一级指针？<br>    我个人的理解是：head作为头结点，它也是指针，指针存放的就是地址，当然它本身也有地址，如果你不把指针的地址传给二级指针的话，那么每次调用append这个函数的时候，那么head永远给append的函数传的NULL，你永远都改变不了head的值，“&amp;”这个是地址运算符，只有&amp;head才是取head的地址，而如果传一个head给函数，那么只是把head指向的内容告诉了你。</p>
-<p>这个结点存放的是一个数据域和两个指针域，数据域才是用户需要的数据，指针域是指向上一个结点或下一个结点，链表一定是从头结点开始的，如果你没有头结点，你就会找不到这个链表，逻辑上也是说不通的。</p>
-<p>有人说c语言不是高级语言是中级语言，我觉得这个是说不通的，众所周知Java是面向对象的语言，而c语言是面向过程的语言，不过c语言其实也是有对象，而且很多功能都可以实现，c语言的对象，叫做数据对象，数据对象可以静态实现和动态实现，我们这个例子中用的是malloc动态链表，调用对象不就是调用地址嘛，所以这里的对象很显然就是head结点开始，不要被结点这种名字给弄晕了，链表作为数据结构，它把对象都存在到了结点里，结点是怎么定义的，不就是结构体嘛，由结构体产生对象，然后每一个结点存放下一个结点的地址，以及下一个结点存放前一个结点的地址，然后就形成了双向链表，数据元素指的是数据对象内部的具体值，在这个代码中，p-&gt;data就是数据元素，数据项是最小单位，数据项就是对象中的一个字段或属性，在个代码中就是data，像那些出书的人总是喜欢玩文字游戏，所谓的面向过程，这个过程其实说的就是函数，你看看上面的代码，结点的创建是用结构体，对象的创建是用的函数，对象的空间是用malloc函数开辟，有感受到割裂感了嘛，面向对象就不那么做了，直接把属性和函数全部放在一起，形成一个新的数据结构，就是“类”，以类为模版创建对象，Java是纯面向对象的语言，但又不是那么纯，毕竟Java有自动装箱和拆箱的功能，这个是编译器自动处理的，面向对象对事物的描述更加准确，我定义一个结点类，就能就能实现所见即所得了吧，面向过程的话，它把数据的定义和函数给分开了，还要说一句的是万事万物皆是数据，我们说的数据，和你想的可能是不一样的，我们说的数据那个范围是非常广的，不仅限于数字123，数据结构不正是存放数据的容器嘛，而链表和顺序表是最基础的，是一对一的关系，通过这个数据结构，我们可以推广出更复杂的数据结构。<br>上面的代码量非常少，只是创建了链表，然后插入了之后，再显示出来，是非常简答的，只是有的人C语言不好的人，看起来会有压力，多看几遍就行了，比如像这个函数定义“struct Node createNode(int data) ”，是不是看起来很奇怪，它其实是定义了一个struct Node类型的函数，函数名叫做createNode，参数是int data，即返回值是一个指针，这个需要和指针变量区分一下，指针变量的话，可以加个括号，函数指针变量就是接收其他函数的地址，然后实现钩子函数，就是类似面向对象语言中的多态，就是不同的对象，会产生不同的行为，也就产生了多态，钩子函数也可以叫事物处理函数，就是你传什么函数的指针，我就执行什么，还有编译器的话其实只认参数的声明，参数名其实并不是最重要，主要是给我们人看的，现在不是流行语义化了嘛，我想就是这个道理，暂时先说这么多吧。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/09/938fe7e3f906.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-基本数据类型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2122,14 +2353,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">什么是Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">基本操作</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">概念</a>
               </li>
              
@@ -2150,23 +2373,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">什么是Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">基本操作</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">List集合的特点</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">主要方法</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">什么是代理模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">静态代理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">动态代理</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2198,23 +2417,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">什么是代理模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">静态代理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">动态代理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Map接口的特点</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">基本数据类型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">结构化程序设计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">TCP网络模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2227,6 +2450,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">I/O多路复用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">TCP网络模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
             
             <div class="clearfix"></div>

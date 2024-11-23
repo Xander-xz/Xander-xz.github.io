@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: 什么是代理模式 | Hexo</title>
+  <title>Java集合-Map接口(key-value) | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/tags/%E4%BB%80%E4%B9%88%E6%98%AF%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/index.html">
+  <meta name="description" content="Map接口的特点：①KV键值对方式存储②Key键唯一，Value允许重复③无序。 Map有四个实现类：1.HashMap类2.LinkedHashMap类3.TreeMap类4.Hashtable类 1.HashMap类：存储结构：哈希表 &#x3D; 数组Node  + 链表（红黑树） 扩容方法：resize() 扩容机制：原数组的2倍 特点：①Key唯一，不允许重复②Value允许重复③无序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java集合-Map接口(key-value)">
+<meta property="og:url" content="http://example.com/2024/11/2360219f8ca5.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Map接口的特点：①KV键值对方式存储②Key键唯一，Value允许重复③无序。 Map有四个实现类：1.HashMap类2.LinkedHashMap类3.TreeMap类4.Hashtable类 1.HashMap类：存储结构：哈希表 &#x3D; 数组Node  + 链表（红黑树） 扩容方法：resize() 扩容机制：原数组的2倍 特点：①Key唯一，不允许重复②Value允许重复③无序">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-11-23T13:00:38.000Z">
+<meta property="article:modified_time" content="2024-11-23T13:01:15.955Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="Map接口的特点">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -150,68 +155,423 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Java集合-Map接口-key-value" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2024/09/eef2b66eb501.html" class="archive-article-date">
-  	<time datetime="2024-09-29T06:16:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-09-29</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2024/09/eef2b66eb501.html">笔记</a>
+    <h1 class="article-title" itemprop="name">
+      Java集合-Map接口(key-value)
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2024/11/2360219f8ca5.html" class="archive-article-date">
+  	<time datetime="2024-11-23T13:00:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-11-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Map接口的特点：①KV键值对方式存储②Key键唯一，Value允许重复③无序。</p>
+<p>Map有四个实现类：1.HashMap类2.LinkedHashMap类3.TreeMap类4.Hashtable类</p>
+<p>1.HashMap类：<br>存储结构：哈希表 &#x3D; 数组Node  + 链表（红黑树）</p>
+<p>扩容方法：resize()</p>
+<p>扩容机制：原数组的2倍</p>
+<p>特点：①Key唯一，不允许重复②Value允许重复③无序</p>
+<p>HashMap: KV键值对集合，key唯一，value允许重复<br>put()方法:添加键值对，如果key不存在，则返回null; 如果key存在，则保存新value,返回旧<br>value<br>get()方法:根据key,获取value，如果key存在，获取该元素的键值对的value值;如果不存在，<br>则获取该元素的键值对的value值为null;如果返回的value为null, 类型转换时，会发生空指针</p>
+<p>public static void main(String args) {</p>
+<pre><code>    // Map键值对集合
+    //保存城市人口信息
+    // key :城市名称.
+    // val:人口数量
+    HashMap&lt;String,Integer&gt; map = new HashMap&lt;String,Integer&gt;();
+    map.put(&quot;X咸阳&quot;,1100);
+    
+    HashMap&lt;String,Integer&gt; anotherMap = new HashMap&lt;String,Integer&gt;();
+    anotherMap.put(&quot;B北京&quot;, 2500);
+    anotherMap.put(&quot;C长春&quot;, 300);
+    anotherMap.put(&quot;D大连&quot;, 1000);
+    map.putAll(anotherMap);
+    anotherMap.put(&quot;D大连&quot;, 1000);  //key不允许重复
+    map.put(&quot;E鄂尔多斯&quot;, 1000);//value不允许重复
+    
+    System.out.println(map);
+
+&#125;
+</code></pre>
+<p>输出：</p>
+<p>{D大连&#x3D;1000, E鄂尔多斯&#x3D;1000, C长春&#x3D;300, B北京&#x3D;2500, X咸阳&#x3D;1100}<br>put()与get()方法：</p>
+<p>public static void main(String args) {<br>    HashMap&lt;String,Integer&gt; cityMap &#x3D; new HashMap&lt;String,Integer&gt;();</p>
+<pre><code>//put()方法：添加键值对
+//如果key不存在，则返回null
+System.out.println(cityMap.put(&quot;X西安&quot;, 1100));
+System.out.println(cityMap.put(&quot;B北京&quot;, 2500));
+System.out.println(cityMap.put(&quot;C长春&quot;, 300));
+System.out.println(cityMap.put(&quot;D大连&quot;, 1000));
+//如果key存在，则保存新value,返回旧value
+System.out.println(cityMap.put(&quot;X西安&quot;, 1200));
+
+//get()方法：根据Key值，获取value
+//key存在
+int value1 = cityMap.get(&quot;B北京&quot;);
+System.out.println(&quot;B北京===&gt;&quot;+value1);
+
+//key不存在
+Integer value2 = cityMap.get(&quot;N南京&quot;);
+System.out.println(&quot;N南京&quot;+value2);
+
+//如果返回的value为null,类型转换时，会发生空指针
+int value3 = cityMap.get(&quot;N南京&quot;);
+&#125;
+</code></pre>
+<p> 输出：</p>
+<p>null<br>null<br>null<br>null<br>1100<br>B北京&#x3D;&#x3D;&#x3D;&gt;2500<br>N南京null<br>Exception in thread “main” java.lang.NullPointerException<br>    at com.zad.day24_1_26_01.Text08.main(Text08.java:28)<br>遍历map:</p>
+<p>遍历Map<br>方式1:获取所有的key,然后按照每个key获取对应的value<br>方式2:获取所有的value<br>方式3:将每个KV键值对按照Entry类型的对象，统一获取</p>
+<p>方式1 :获取所有的key,然后按照每个key获取对应的value</p>
+<p>public static void main(String args) {<br>        HashMap&lt;String,String&gt; map &#x3D; new HashMap&lt;String,String&gt;();</p>
+<pre><code>    map.put(&quot;华语&quot;, new String[] &#123; &quot;林俊杰&quot;, &quot;陈奕迅&quot;, &quot;邓紫棋&quot;, &quot;薛之谦&quot;, &quot;汪苏泷&quot;, &quot;李荣浩&quot; &#125;);
+    map.put(&quot;欧美&quot;, new String[] &#123; &quot;贾斯丁比伯&quot;, &quot;威肯&quot;, &quot;艾兰沃克&quot;, &quot;德雷克&quot; &#125;);
+    map.put(&quot;乐队&quot;, new String[] &#123; &quot;魔力红&quot;, &quot;烟鬼组合&quot;, &quot;共和时代&quot;, &quot;辅音组合&quot;, &quot;Linkin Park&quot;, &quot;Westlife&quot; &#125;);
+    
+    //遍历Map
+    //方式1：获取所有的key,然后按照每个key获取对应的value
+    Set&lt;String&gt; keys = map.keySet();//获取map中所有的key
+    
+    System.out.println(&quot;所有的key:&quot;+keys);
+    System.out.println(&quot;按照每个key,获取对应的value&quot;);
+    
+    Iterator&lt;String&gt; it = keys.iterator();
+    while(it.hasNext()) &#123;
+        String key = it.next();//获取每个key
+        String[] val = map.get(key);//按照key获取对应的value
+        System.out.printf(&quot;%s ---&gt; %s  \n&quot;,key,Arrays.toString(val));	
+    &#125;
+    
+    
+    
+&#125;
+</code></pre>
+<p>输出：</p>
+<p>所有的key:华语, 乐队, 欧美<br>按照每个key,获取对应的value<br>华语 —&gt; 林俊杰, 陈奕迅, 邓紫棋, 薛之谦, 汪苏泷, 李荣浩<br>乐队 —&gt; 魔力红, 烟鬼组合, 共和时代, 辅音组合, Linkin Park, Westlife<br>欧美 —&gt; 贾斯丁比伯, 威肯, 艾兰沃克, 德雷克<br>方式2：获取所有的value</p>
+<p>public static void main(String args) {<br>        HashMap&lt;String,String&gt; map &#x3D; new HashMap&lt;String,String&gt;();</p>
+<pre><code>    map.put(&quot;华语&quot;, new String[] &#123; &quot;林俊杰&quot;, &quot;陈奕迅&quot;, &quot;邓紫棋&quot;, &quot;薛之谦&quot;, &quot;汪苏泷&quot;, &quot;李荣浩&quot; &#125;);
+    map.put(&quot;欧美&quot;, new String[] &#123; &quot;贾斯丁比伯&quot;, &quot;威肯&quot;, &quot;艾兰沃克&quot;, &quot;德雷克&quot; &#125;);
+    map.put(&quot;乐队&quot;, new String[] &#123; &quot;魔力红&quot;, &quot;烟鬼组合&quot;, &quot;共和时代&quot;, &quot;辅音组合&quot;, &quot;Linkin Park&quot;, &quot;Westlife&quot; &#125;);
+    
+    //遍历map
+    //方式2：获取所有的value
+    Collection&lt;String[]&gt; values=map.values();
+    for(String[] array:values) &#123;
+        System.out.println(Arrays.toString(array));
+    &#125;
+
+    
+&#125;
+</code></pre>
+<p>输出：</p>
+<p>林俊杰, 陈奕迅, 邓紫棋, 薛之谦, 汪苏泷, 李荣浩<br>魔力红, 烟鬼组合, 共和时代, 辅音组合, Linkin Park, Westlife<br>贾斯丁比伯, 威肯, 艾兰沃克, 德雷克<br> 方式3：将每个KV键值对按照Entry类型的对象，统一获取</p>
+<p>public static void main(String args) {<br>        HashMap&lt;String, String&gt; map &#x3D; new HashMap&lt;String, String&gt;();</p>
+<pre><code>    map.put(&quot;华语&quot;, new String[] &#123; &quot;林俊杰&quot;, &quot;陈奕迅&quot;, &quot;邓紫棋&quot;, &quot;薛之谦&quot;, &quot;汪苏泷&quot;, &quot;李荣浩&quot; &#125;);
+    map.put(&quot;欧美&quot;, new String[] &#123; &quot;贾斯丁比伯&quot;, &quot;威肯&quot;, &quot;艾兰沃克&quot;, &quot;德雷克&quot; &#125;);
+    map.put(&quot;乐队&quot;, new String[] &#123; &quot;魔力红&quot;, &quot;烟鬼组合&quot;, &quot;共和时代&quot;, &quot;辅音组合&quot;, &quot;Linkin Park&quot;, &quot;Westlife&quot; &#125;);
+    
+    //遍历Map
+    //方式3：将每个KV键值对按照Entry类型的对象，统一获取
+    Set&lt;Entry&lt;String,String[]&gt;&gt; entrys = map.entrySet();
+    for(Entry&lt;String,String[]&gt;  keyValue:entrys) &#123;
+        System.out.printf(&quot;%s---&gt;%s\n&quot;,keyValue.getKey(),Arrays.toString(keyValue.getValue()));
+    &#125;
+&#125;
+</code></pre>
+<p> 输出：</p>
+<p>华语—&gt;林俊杰, 陈奕迅, 邓紫棋, 薛之谦, 汪苏泷, 李荣浩<br>乐队—&gt;魔力红, 烟鬼组合, 共和时代, 辅音组合, Linkin Park, Westlife<br>欧美—&gt;贾斯丁比伯, 威肯, 艾兰沃克, 德雷克<br>常用方法：</p>
+<p>判断key是否存在: containsKey()方法<br>根据key获取value,如果key不存在，则返回default默认值: getOrDefault()方法<br>根据key,删除KV键值对:remove()方法<br>获取键值对的数量:size()方法<br>public static void main(String args) {<br>        &#x2F;&#x2F;歌手分类<br>        HashMap&lt;String, String&gt; map&#x3D;new HashMap&lt;String, String&gt;();</p>
+<pre><code>    map.put(&quot;华语&quot;, new String[] &#123; &quot;林俊杰&quot;, &quot;陈奕迅&quot;, &quot;邓紫棋&quot;, &quot;薛之谦&quot;, &quot;汪苏泷&quot;, &quot;李荣浩&quot; &#125;);
+    map.put(&quot;欧美&quot;, new String[] &#123; &quot;贾斯丁比伯&quot;, &quot;威肯&quot;, &quot;艾兰沃克&quot;, &quot;德雷克&quot; &#125;);
+    map.put(&quot;乐队&quot;, new String[] &#123; &quot;魔力红&quot;, &quot;烟鬼组合&quot;, &quot;共和时代&quot;, &quot;辅音组合&quot;, &quot;Linkin Park&quot;, &quot;Westlife&quot; &#125;);
+    
+    //判断key是否存在
+    boolean isContains = map.containsKey(&quot;日韩&quot;);
+    System.out.println(isContains);
+    
+    //根据key获取value，如果key不存在，则返回default默认值
+    String[] value = map.getOrDefault(&quot;日韩&quot;, new String[] &#123;&#125;);
+    System.out.println(Arrays.toString(value));
+    
+    //根据key，删除KV键值对
+    map.remove(&quot;欧美&quot;);
+    System.out.println(map);
+    
+    //获取键值对的数量
+    int size = map.size();
+    System.out.println(size);
+&#125;
+</code></pre>
+<p> 输出：</p>
+<p>false</p>
+<p>{华语&#x3D;Ljava.lang.String;@3d8c7aca, 乐队&#x3D;Ljava.lang.String;@5ebec15}<br>2<br> 应用例：统计英文字母、中文、数字、标点符号的个数</p>
+<p>public static void main(String args) {<br>        &#x2F;&#x2F;统计英文字母、中文、数字、标点符号的个数<br>        String str &#x3D; “OMG,你们的中英混搭真是各有千秋,但Someone丝毫掩盖不了你们那硬朗的英语底子！For eg.papi酱真的very有才华啊，哦买噶的，U6666666!!!罢特，someone也是成功地掩盖了自己小学程度的英语水平!这样式的，I是不会use的，because l hate 这种人very much~”;</p>
+<pre><code>    //统计结果，保存到map中
+    HashMap&lt;String, Integer&gt; map = new HashMap&lt;String, Integer&gt;();
+</code></pre>
+<p>&#x2F;&#x2F;		map.put(“letters”, 0);<br>&#x2F;&#x2F;		map.put(“numbers”, 0);<br>&#x2F;&#x2F;		map.put(“chinese”, 0);<br>&#x2F;&#x2F;		map.put(“flags”, 0);</p>
+<pre><code>    // 遍历字符串，判断每个字符
+    for (int i = 0; i &lt; str.length(); i++) &#123;
+        // 获取每一个字符
+        char c = str.charAt(i);
+
+        if (c &gt;= &#39;A&#39; &amp;&amp; c &lt; &#39;Z&#39; || c &gt; &#39;a&#39; &amp;&amp; c &lt; &#39;z&#39;) &#123;
+            //获取一个字符
+            int oldValue = map.getOrDefault(&quot;letters&quot;, 0);
+            int newValue = oldValue + 1;
+            map.put(&quot;letters&quot;, newValue);
+        &#125; else if (c &gt; &#39;0&#39; &amp;&amp; c &lt; &#39;9&#39;) &#123;
+            map.put(&quot;numbers&quot;, map.getOrDefault(&quot;numbers&quot;, 0)+1);
+        &#125; else if (c &gt;= 0x4e00 &amp;&amp; c &lt;= 0x29fa5) &#123;
+            map.put(&quot;chinese&quot;, map.getOrDefault(&quot;chinese&quot;, 0) + 1);
+        &#125; else &#123;
+            map.put(&quot;flags&quot;, map.getOrDefault(&quot;flags&quot;, 0)+ 1);
+        &#125;
+    &#125;
+    System.out.println(map);
+
+&#125;
+</code></pre>
+<p>输出：</p>
+<p>{chinese&#x3D;79, flags&#x3D;16, numbers&#x3D;7, letters&#x3D;52}<br>2.LinkedHashMap类：<br>存储结构：数组+链表+红黑树，，维护使用链表，记录顺序</p>
+<p>特点：①Key唯一，不允许重复②Value允许重复③有序④LinkedHashMap是HashMap的子类</p>
+<p> 应用例:统计每个字符出现的次数</p>
+<p>public static void main(String args) {<br>        &#x2F;&#x2F;统计每个字符出现的次数<br>        &#x2F;&#x2F;无序<br>        String str &#x3D; “qurfkjcbsdjqpiurfufhdvlajydfgquyvhvaljhvqouygqhvhv”;<br>&#x2F;&#x2F;		HashMap&lt;String,Integer&gt; map1 &#x3D; new HashMap&lt;String, Integer&gt;();<br>        &#x2F;&#x2F;有序<br>        LinkedHashMap&lt;String,Integer&gt; map2 &#x3D; new LinkedHashMap&lt;String, Integer&gt;();</p>
+<pre><code>    for(int i = 0;i&lt;str.length();i++) &#123;
+        String key = str.substring(i,i+1);
+        
+        //判断key是否存在
+        if(map2.containsKey(key)) &#123;
+            //该字符(key)存在
+            map2.put(key, map2.get(key)+1);
+        &#125;else &#123;
+            //该字符不存在
+            map2.put(key, 1);
+        &#125;
+    &#125;
+    System.out.println(map2);
+    
+    
+&#125;
+</code></pre>
+<p> 输出：</p>
+<p>{q&#x3D;5, u&#x3D;5, r&#x3D;2, f&#x3D;4, k&#x3D;1, j&#x3D;4, c&#x3D;1, b&#x3D;1, s&#x3D;1, d&#x3D;3, p&#x3D;1, i&#x3D;1, h&#x3D;5, v&#x3D;6, l&#x3D;2, a&#x3D;2, y&#x3D;3, g&#x3D;2, o&#x3D;1}<br>3.TreeMap类：<br>特点：①Key唯一，不允许重复②Value允许重复③按照Key自动排序④AbstractMap的子类</p>
+<p>存储结构：树中的每个节点均是Entry内部类对象（红黑树）</p>
+<p>例：按照key自动排序，通过key进行比较后排序！！！</p>
+<p>public static void main(String args) {<br>        &#x2F;&#x2F;HashMap:无序，按照key计算保存位置<br>        &#x2F;&#x2F;HashMap&lt;String,String&gt; map &#x3D; new HashMap&lt;String,String&gt;();</p>
+<pre><code>    // TreeMap:按照key自动排序，通过key进行比较后排序
+    TreeMap&lt;String, String&gt; map = new TreeMap&lt;String, String&gt;();
+
+    map.put(&quot;SN201&quot;, &quot;A1&quot;);
+    map.put(&quot;SN111&quot;, &quot;A2&quot;);
+    map.put(&quot;SN107&quot;, &quot;A3&quot;);
+    map.put(&quot;SN191&quot;, &quot;A4&quot;);
+    map.put(&quot;SN100&quot;, &quot;A5&quot;);
+    map.put(&quot;SN103&quot;, &quot;A6&quot;);
+    map.put(&quot;SN2011&quot;, &quot;A7&quot;);
+    map.put(&quot;SN1031&quot;, &quot;A8&quot;);
+    map.put(&quot;SN1231&quot;, &quot;A9&quot;);
+
+    for (Entry&lt;String, String&gt; entry : map.entrySet()) &#123;
+        System.out.println(entry.getKey() + &quot;:&quot; + entry.getValue());
+    &#125;
+&#125;
+</code></pre>
+<p> 输出：</p>
+<p>SN100:A5<br>SN103:A6<br>SN1031:A8<br>SN107:A3<br>SN111:A2<br>SN1231:A9<br>SN191:A4<br>SN201:A1<br>SN2011:A7<br> 调用TreeMap&lt;&gt;()的有参构造方法，重写compare()方法，按照大小排序</p>
+<p>public static void main(String args) {<br>        &#x2F;&#x2F;HashMap:无序，按照key计算保存位置<br>        &#x2F;&#x2F;HashMap&lt;String,String&gt; map &#x3D; new HashMap&lt;String,String&gt;();</p>
+<pre><code>    // TreeMap:按照key自动排序，通过key进行比较后排序
+    TreeMap&lt;String, String&gt; map = new TreeMap&lt;String, String&gt;(new Comparator&lt;String&gt;() &#123;
+
+        @Override
+        public int compare(String o1, String o2) &#123;
+            int n1 = Integer.parseInt(o1.substring(2));
+            int n2 = Integer.parseInt(o2.substring(2));
+
+            return n1 - n2;
+        &#125;
+    &#125;);
+
+    map.put(&quot;SN201&quot;, &quot;A1&quot;);
+    map.put(&quot;SN111&quot;, &quot;A2&quot;);
+    map.put(&quot;SN107&quot;, &quot;A3&quot;);
+    map.put(&quot;SN191&quot;, &quot;A4&quot;);
+    map.put(&quot;SN100&quot;, &quot;A5&quot;);
+    map.put(&quot;SN103&quot;, &quot;A6&quot;);
+    map.put(&quot;SN2011&quot;, &quot;A7&quot;);
+    map.put(&quot;SN1031&quot;, &quot;A8&quot;);
+    map.put(&quot;SN1231&quot;, &quot;A9&quot;);
+
+    for (Entry&lt;String, String&gt; entry : map.entrySet()) &#123;
+        System.out.println(entry.getKey() + &quot;:&quot; + entry.getValue());
+    &#125;
+&#125;
+</code></pre>
+<p>输出：</p>
+<p>SN100:A5<br>SN103:A6<br>SN107:A3<br>SN111:A2<br>SN191:A4<br>SN201:A1<br>SN1031:A8<br>SN1231:A9<br>SN2011:A7<br>4.Hashtable类<br>特点：①Key唯一，不允许重复②Value允许重复③key 和 value不允许为空，如果为null，则抛出NullPointerExceptino④线程安全，使用synchronized加锁，性能较差</p>
+<p>存储结构：数组+链表</p>
+<p>允许使用null做key<br>不允许使用null做value<br>public static void main(String args) {</p>
+<pre><code>    HashMap&lt;String, String&gt; map=new HashMap&lt;String, String&gt;();
+    map.put(null, &quot;巴黎世家&quot;);//不允许使用null做key
+    map.put(&quot;AAA&quot;, null);//允许使用null做value
+    System.out.println(map);
+    
+    Hashtable&lt;String, String&gt; table=new Hashtable&lt;String, String&gt;();
+    table.put(null, &quot;巴黎世家&quot;);//不允许使用null做key
+    table.put(&quot;AAA&quot;, null);//不允许使用null做value
+    System.out.println(table);
+    &#125;
+</code></pre>
+<p>输出：</p>
+<p>{null&#x3D;巴黎世家, AAA&#x3D;null}<br>Exception in thread “main” java.lang.NullPointerException<br>    at java.util.Hashtable.put(Hashtable.java:465)<br>    at com.zad.day24_1_26_01.Text15.main(Text15.java:15)</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">什么是代理模式</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">静态代理</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态代理</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Map接口的特点</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2024/11/2360219f8ca5.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2024/11/8f88adaf15b1.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">IO流</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -234,9 +594,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
