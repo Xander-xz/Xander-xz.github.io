@@ -152,112 +152,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-IO流" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/11/8f88adaf15b1.html">IO流</a>
-    </h1>
-  
-
-        
-        <a href="/2024/11/8f88adaf15b1.html" class="archive-article-date">
-  	<time datetime="2024-11-23T12:26:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-11-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>IO ( 位于 java.io 包中 )<br>一、概念</p>
-<ol>
-<li>流：数据在内存和其他存储设备传输的通道、管道。</li>
-<li>流的分类：<br>(1) 按照方向分：  以 JVM 内存为参照物<br>a. 输入流：将  其他存储设备  中数据读入到 JVM 内存  中 。 -&gt; 读<br>b. 输出流：将 JVM 内存  中数据写入到  其他存储设备  中。 -&gt; 写<br>(2) 按照单位分：<br>a. 字节流：以字节为传输单位，可以用于操作所有类型的文件。<br>b. 字符流：以字符为传输单位，可以用于操作文本类型的文件。<br>文本文件：只要能以记事本打开，并且不丢失原有文件内容的文件。<br>例如： .txt &#x2F; .java &#x2F; .c &#x2F; .html 等<br>.class &#x2F; .ppt &#x2F;.mp3 等文件不是文本文件。<br>(3) 按照功能分：<br>a. 节点流：只具有基本的读写功能。<br>b. 过滤流：在节点流的基础上，增强读写功能。<br>二、字节流</li>
-<li>字节流的父类： ( 父类为抽象类 )<br>(1) InputStream: 字节输入流 — 》读操作 (read)<br>(2) OutputStream: 字节输出流 – 》写操作 (write)</li>
-<li>字节节点流<br>(1) FileOutputStream ：文件字节输出流<br>常用的构造方法：<br>a. FileOutputStream fos &#x3D; new FileOutputStream(“E:&#x2F;test&#x2F;a.txt”);<br>I. 参数：代表操作文件的路径： “E:&#x2F;test&#x2F;a.txt” 或是 “E: \ \test \ \ a.txt”<br>II. 绝对路径：盘符： &#x2F; 文件夹 &#x2F; 文件<br>III. 注意：如果指定文件不存在，则系统默认创建新的文件，但是如果指定文件夹不存在，则报错，错误信息为： java.io.FileNotFoundException: ( 系统找不到指定的路径。 )<br>b. FileOutputStream fos &#x3D; new FileOutputStream(“a.txt”);<br>I. 相对路径：默认在项目的根目录下查找所需要的文件，有直接用，如果指定文件不存在，则系统默认创建 。<br>c. FileOutputStream fos &#x3D; new FileOutputStream(“file&#x2F;c.txt”,false);<br>I. 第一个参数：指定操作文件路径 II. 第二个参数： boolean 类型，是否在原有文件内容基础上进行追加， true- 追加； false- 覆盖<br>常用方法：<br>a. void write(int n): 将单个字节写入到文件中<br>b. void write(byte[] bs): 将多个字节写入到文件中<br>c. void write(byte[] bs,int off,int len): 将 bs 数组中的部分内容写入到文件中，起始下标为 off ，写入的个数为 len.<br>d. void close() : 代表关闭资源。<br>(2) FileInputStream : 文件字节输入流<br>常用的构造方法：<br>a. FileInputStream fis &#x3D; new FileInputStream(“file&#x2F;d.txt”);<br>I. 参数：代表操作文件的路径及文件名，但是如果指定的文件找不到，则系统不会默认创建，直接报错，错误信息为： java.io.FileNotFoundException: ( 系统找不到指定的文件。 )<br>常用的方法：<br>a. int read() : 一次性从文件中读取一个字节的内容，读取的内容作为返回值返回，如果达到文件的尾部，则返回 -1 。<br>开发应用：将文件的内容进行全部读取。<br>while(true){<br>int n &#x3D; fis.read();<br>if (n-1) break;<br>&#x2F;&#x2F; 基于 n 进行内容操作<br>System.out.println((char)n);<br>}<br>b. int read(byte bs) ：从文件中一次性读取多个字节内容，读取的内容自动存储在 bs 数组中，返回值代表实际读取的字节数，如果达到文件的尾部，则返回 -1.<br>c. int read(byte bs,int off,int len) ：从文件中一次性读取多个字节内容，读取的内容自动存储在 bs 数组中 ( 存储的起始下标为 off) ，一次性读取的字节个数为 len , 如果达到文件的尾部，则返回 -1.<br>思考：如何实现文件拷贝？ — 》文件的上传与下载的实现原理。</li>
-<li>字节过滤流<br>(1) BufferedInputStream&#x2F; BufferedOutputStream<br>a. 缓冲流，提高 IO 读写效率，减少访问磁盘的次数<br>b. 缓冲流增强了缓冲区，将缓冲的内容一次性写入到文件中，可以调用 flush 方法，或是 close 方法。<br>flush 方法是将缓冲区的内容一次性的写入到文件中，同时缓冲清空，流可以继续使用；<br>但是 close 方法是关闭流的同时调用的 flush 方法，清空缓冲区的同时将缓冲的内容一次性写入文件中，流不能继续被使用。<br>注意：当缓冲区满的时候，自动将缓冲区的内容一次性的写入到文件中。<br>(2) DataOutputStream&#x2F;DataInputStream a. 用于操作 8 种基本类型的数据<br>b. writeByte( 形式参数 )&#x2F; writeShort( 参数 )&#x2F;wirteInt( 参数 )&#x2F;…<br>readByte()&#x2F;readShort()&#x2F;readInt()&#x2F;…<br>(3) ObjectOutputStream&#x2F;ObjectInputStream<br>a. 增强了缓冲区<br>b. 增强了操作 8 种基本数据类型的功能<br>c. 增强了操作对象的功能。<br>writeObject(Object obj): 将对象写入到文件中<br>Object readObject() : 从文件中读取对象。<br>d. 对象序列化：将对象放在流上进行传输的过程被称为对象序列化。【重点】<br>I. 对象序列化的要求 : 参与对象序列化的对象对应的类必须实现 java.io.Serializable 接口 ( 标记性接口 )<br>否则运行报错，错误信息为： java.io.NotSerializableException( 不可序列化异常 ) 【重点】<br>II. 文件达到尾部的标记： java.io.EOFException<br>III. 被 transient 修饰的属性不参与对象序列化 【重点】<br>Iv. 如果参与对象序列化的对象中有自定义类型的属性，则自定类型的属性对应的类也必须实现<br>java.io.Serializable 接口，否则运行报错，为不可序列化的异常。<br>V. 集合对应实现了创建的对象可以参与对象序列化，因为实现类实现 java.io.Serializable 接口；<br>但是如果集合中存储的是自定义类型的对象，则自顶类型的对象对应 的类也需要实现<br>java.io.Serializable 接口。<br>三、字符编码</li>
-<li>常见的编码方式：<br>(1) ISO8859-1 西欧编码，底层占用 1 个字节<br>(2) GBK 简体中文， 2 万汉字<br>GB2312 简体中文， 6000 多常用汉字<br>GB18030 简体中文， 7 万左右的中国符号<br>注意： GBK&#x2F;GB2312&#x2F;GB18030 相互兼容。<br>(3) Big5 繁体中文<br>(4) UTF-8 万国码，底层采用动态字节数存储，每一个字符存储空间为 1<del>3 字节；<br>汉字： 2</del>3 字节</li>
-<li>编码和解码<br>(1) 编码：字符对应十进制转换为二进制的过程<br>(2) 解码：二进制转换为对应的十进制从而转换为与之对应的字符的过程。<br>注意：编码方式和解码方式必须统一，否则会出现乱码。<br>四、字符流</li>
-<li>字符流父类： ( 抽象类 ) (1) Reader: 字符输入流 – 》读操作<br>(2) Writer: 字符输出流 – 》写操作</li>
-<li>字符流的节点流<br>(1) FileWriter: 文件字符输出流<br>常用的构造方法：<br>FileWriter fw &#x3D; new FileWriter(“file&#x2F;a.txt”);<br>注意：参数代表指定文件的路径及文件名，写法等同于 FileOutputStream 路径的写法。<br>常用功能方法：<br>① void write(int n): 将单个字符写入到文件中。<br>② void write(String str): 将多个字符一次性写入到文件中<br>③ void write(char[] cs): 将 cs 数组中所有字符内容一次性写入到文件中<br>(2) FileReader: 文件字符输入流<br>常用构造方法：<br>FileReader fr &#x3D; new FileReader(“file&#x2F;a.txt”);<br>常用功能方法：<br>① int read() ：一次读取一个字符内容，将读取的字符内容存储在返回值，达到文件尾部 , 则返回 -1 。<br>② int read(char[] cs): 一次性读取多个字符的内容，将读取的字符内容自动存储在 cs 数组中，返回值<br>代表实际读取的字符个数，如果达到文件的尾部，则返回 -1.</li>
-<li>字符的过滤流【重点】<br>(1) BufferedReader :<br>常用方法： String readLine() : 一次性读取一个文本行，如果达到文件的尾部，则返回 null 。<br>&#x2F;&#x2F; 1. 创建字符节点流对象<br>FileReader fr &#x3D; new FileReader(“file&#x2F;c.txt”);<br>&#x2F;&#x2F; 2. 包装过滤流<br>BufferedReader br &#x3D; new BufferedReader(fr);<br>&#x2F;&#x2F; 3. 读操作<br>while(true){<br>String str &#x3D; br.readLine();<br>if(str &#x3D;&#x3D; null) break;<br>System.out.println(str);<br>}<br>&#x2F;&#x2F; 4. 关闭：最外层<br>br.close();<br>(2) PrintWriter:<br>① 可以操作 8 种基本数据类型<br>② 提供了自动换行和不换行的 println&#x2F;print 方法<br>println( 形式参数 ) ：自动完成换行<br> print( 形式参数 ): 不自动换行<br>③ println(Object obj)&#x2F;print(Object obj) ：将对象的 toString 方法的返回值结果写入到文件中。<br>注意：写出 ObjectOutputStream 中 writeObject(Object ob) 方法 和 PrintWriter 中 println(Object obj)<br>方法的区别。<br>解析： ObjectOutputStream 中 writeObject(Object ob) ：将对象放入流上进行传输，要求传输的对象对应的类必须实现 java.io.Serializable 接口，这个过程被称为对象序列化。<br>PrintWriter 中 println(Object obj): 将对象的 toString 方法的返回值 String 类型的结果写入文件中 ,写入的对象对应的类没有任何要求。</li>
-<li>字符的桥转流【开发重点】<br>(1) InputStreamReader: 桥转的输入流<br>OutputStreamWriter: 桥转换的输出流<br>(2) 作用：<br>a. 可以将字节流转换字符流，即字节流和字符流转换桥梁<br>b. 可以设置编解码的格式<br>(3) 应用场景：需要指定编解码格式的时候，可以利用桥转流进行指定。<br>(4) 使用步骤：<br>① 创建字节节点流对象： FileOutputStream&#x2F;FileInputStream<br>② 创建桥转换流：字节流 - 》字符流，同时指定编解码格式<br>OutputStreamWriter &#x2F; InputStreamReader<br>③ 包装过滤流：目的增强字符流的读写操作<br>PrintWriter &#x2F; BufferedReader<br>④ 读写操作<br>⑤ 关闭流：关闭最外层即可<br>五、 File 类 (java.io 包中 )</li>
-<li>File 类和 IO 流的区别。<br>(1) IO 流：对文件的内容进行操作，读取的内容或是将内容写入到文件中。<br>(2) File 类：对文件本身进行操作，例如：删除文件、更改文件名等。<br>注意： File 类本身不具有操作文件的功能，类中的方法提供了操作文件的功能。</li>
-<li>File 类中常用的方法：<br>(1) String getName() : 获取文件名，带有扩展名。<br>(2) String getAbsolutePath(): 获取绝对路径。<br>&#x2F;&#x2F; 功能：获取文件夹中所有内容，同时进行逐一判断<br>public static void selectAllEndJava(File file){<br>&#x2F;&#x2F; 获取文件夹中所有文件和文件夹<br>File[] fs &#x3D; file.listFiles();<br>&#x2F;&#x2F; 遍历：获取每一个文件或是文件夹<br>for(File f:fs){<br>&#x2F;&#x2F;判断是文件还是文件夹<br>if(f.isFile()){<br>&#x2F;&#x2F; 是文件<br>&#x2F;&#x2F; 判断文件是否 以 .java结尾<br>String name &#x3D; f.getName();<br>if(name.endsWith(“.java”)){<br>&#x2F;&#x2F; 打印输出 绝对路径<br>System.out.println(f.getAbsolutePath());<br>}<br>}else{<br>&#x2F;&#x2F; 文件夹:<br>selectAllEndJava(f);&#x2F;&#x2F; 递归<br> }<br> }</li>
-</ol>
-<p><img src="https://raw.githubusercontent.com/Xander-xz/test/main/img/202411212228867.jpg" alt="bb.jpg"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">概念</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">字节流</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">字符编码</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">字符流</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">File类</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/11/8f88adaf15b1.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-代理模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1814,6 +1708,112 @@ int value3 = cityMap.get(&quot;N南京&quot;);
 
 
   
+    <article id="post-IO流" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/09/35ea27c801ea.html">IO流</a>
+    </h1>
+  
+
+        
+        <a href="/2024/09/35ea27c801ea.html" class="archive-article-date">
+  	<time datetime="2024-09-28T12:26:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-09-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>IO ( 位于 java.io 包中 )<br>一、概念</p>
+<ol>
+<li>流：数据在内存和其他存储设备传输的通道、管道。</li>
+<li>流的分类：<br>(1) 按照方向分：  以 JVM 内存为参照物<br>a. 输入流：将  其他存储设备  中数据读入到 JVM 内存  中 。 -&gt; 读<br>b. 输出流：将 JVM 内存  中数据写入到  其他存储设备  中。 -&gt; 写<br>(2) 按照单位分：<br>a. 字节流：以字节为传输单位，可以用于操作所有类型的文件。<br>b. 字符流：以字符为传输单位，可以用于操作文本类型的文件。<br>文本文件：只要能以记事本打开，并且不丢失原有文件内容的文件。<br>例如： .txt &#x2F; .java &#x2F; .c &#x2F; .html 等<br>.class &#x2F; .ppt &#x2F;.mp3 等文件不是文本文件。<br>(3) 按照功能分：<br>a. 节点流：只具有基本的读写功能。<br>b. 过滤流：在节点流的基础上，增强读写功能。<br>二、字节流</li>
+<li>字节流的父类： ( 父类为抽象类 )<br>(1) InputStream: 字节输入流 — 》读操作 (read)<br>(2) OutputStream: 字节输出流 – 》写操作 (write)</li>
+<li>字节节点流<br>(1) FileOutputStream ：文件字节输出流<br>常用的构造方法：<br>a. FileOutputStream fos &#x3D; new FileOutputStream(“E:&#x2F;test&#x2F;a.txt”);<br>I. 参数：代表操作文件的路径： “E:&#x2F;test&#x2F;a.txt” 或是 “E: \ \test \ \ a.txt”<br>II. 绝对路径：盘符： &#x2F; 文件夹 &#x2F; 文件<br>III. 注意：如果指定文件不存在，则系统默认创建新的文件，但是如果指定文件夹不存在，则报错，错误信息为： java.io.FileNotFoundException: ( 系统找不到指定的路径。 )<br>b. FileOutputStream fos &#x3D; new FileOutputStream(“a.txt”);<br>I. 相对路径：默认在项目的根目录下查找所需要的文件，有直接用，如果指定文件不存在，则系统默认创建 。<br>c. FileOutputStream fos &#x3D; new FileOutputStream(“file&#x2F;c.txt”,false);<br>I. 第一个参数：指定操作文件路径 II. 第二个参数： boolean 类型，是否在原有文件内容基础上进行追加， true- 追加； false- 覆盖<br>常用方法：<br>a. void write(int n): 将单个字节写入到文件中<br>b. void write(byte[] bs): 将多个字节写入到文件中<br>c. void write(byte[] bs,int off,int len): 将 bs 数组中的部分内容写入到文件中，起始下标为 off ，写入的个数为 len.<br>d. void close() : 代表关闭资源。<br>(2) FileInputStream : 文件字节输入流<br>常用的构造方法：<br>a. FileInputStream fis &#x3D; new FileInputStream(“file&#x2F;d.txt”);<br>I. 参数：代表操作文件的路径及文件名，但是如果指定的文件找不到，则系统不会默认创建，直接报错，错误信息为： java.io.FileNotFoundException: ( 系统找不到指定的文件。 )<br>常用的方法：<br>a. int read() : 一次性从文件中读取一个字节的内容，读取的内容作为返回值返回，如果达到文件的尾部，则返回 -1 。<br>开发应用：将文件的内容进行全部读取。<br>while(true){<br>int n &#x3D; fis.read();<br>if (n-1) break;<br>&#x2F;&#x2F; 基于 n 进行内容操作<br>System.out.println((char)n);<br>}<br>b. int read(byte bs) ：从文件中一次性读取多个字节内容，读取的内容自动存储在 bs 数组中，返回值代表实际读取的字节数，如果达到文件的尾部，则返回 -1.<br>c. int read(byte bs,int off,int len) ：从文件中一次性读取多个字节内容，读取的内容自动存储在 bs 数组中 ( 存储的起始下标为 off) ，一次性读取的字节个数为 len , 如果达到文件的尾部，则返回 -1.<br>思考：如何实现文件拷贝？ — 》文件的上传与下载的实现原理。</li>
+<li>字节过滤流<br>(1) BufferedInputStream&#x2F; BufferedOutputStream<br>a. 缓冲流，提高 IO 读写效率，减少访问磁盘的次数<br>b. 缓冲流增强了缓冲区，将缓冲的内容一次性写入到文件中，可以调用 flush 方法，或是 close 方法。<br>flush 方法是将缓冲区的内容一次性的写入到文件中，同时缓冲清空，流可以继续使用；<br>但是 close 方法是关闭流的同时调用的 flush 方法，清空缓冲区的同时将缓冲的内容一次性写入文件中，流不能继续被使用。<br>注意：当缓冲区满的时候，自动将缓冲区的内容一次性的写入到文件中。<br>(2) DataOutputStream&#x2F;DataInputStream a. 用于操作 8 种基本类型的数据<br>b. writeByte( 形式参数 )&#x2F; writeShort( 参数 )&#x2F;wirteInt( 参数 )&#x2F;…<br>readByte()&#x2F;readShort()&#x2F;readInt()&#x2F;…<br>(3) ObjectOutputStream&#x2F;ObjectInputStream<br>a. 增强了缓冲区<br>b. 增强了操作 8 种基本数据类型的功能<br>c. 增强了操作对象的功能。<br>writeObject(Object obj): 将对象写入到文件中<br>Object readObject() : 从文件中读取对象。<br>d. 对象序列化：将对象放在流上进行传输的过程被称为对象序列化。【重点】<br>I. 对象序列化的要求 : 参与对象序列化的对象对应的类必须实现 java.io.Serializable 接口 ( 标记性接口 )<br>否则运行报错，错误信息为： java.io.NotSerializableException( 不可序列化异常 ) 【重点】<br>II. 文件达到尾部的标记： java.io.EOFException<br>III. 被 transient 修饰的属性不参与对象序列化 【重点】<br>Iv. 如果参与对象序列化的对象中有自定义类型的属性，则自定类型的属性对应的类也必须实现<br>java.io.Serializable 接口，否则运行报错，为不可序列化的异常。<br>V. 集合对应实现了创建的对象可以参与对象序列化，因为实现类实现 java.io.Serializable 接口；<br>但是如果集合中存储的是自定义类型的对象，则自顶类型的对象对应 的类也需要实现<br>java.io.Serializable 接口。<br>三、字符编码</li>
+<li>常见的编码方式：<br>(1) ISO8859-1 西欧编码，底层占用 1 个字节<br>(2) GBK 简体中文， 2 万汉字<br>GB2312 简体中文， 6000 多常用汉字<br>GB18030 简体中文， 7 万左右的中国符号<br>注意： GBK&#x2F;GB2312&#x2F;GB18030 相互兼容。<br>(3) Big5 繁体中文<br>(4) UTF-8 万国码，底层采用动态字节数存储，每一个字符存储空间为 1<del>3 字节；<br>汉字： 2</del>3 字节</li>
+<li>编码和解码<br>(1) 编码：字符对应十进制转换为二进制的过程<br>(2) 解码：二进制转换为对应的十进制从而转换为与之对应的字符的过程。<br>注意：编码方式和解码方式必须统一，否则会出现乱码。<br>四、字符流</li>
+<li>字符流父类： ( 抽象类 ) (1) Reader: 字符输入流 – 》读操作<br>(2) Writer: 字符输出流 – 》写操作</li>
+<li>字符流的节点流<br>(1) FileWriter: 文件字符输出流<br>常用的构造方法：<br>FileWriter fw &#x3D; new FileWriter(“file&#x2F;a.txt”);<br>注意：参数代表指定文件的路径及文件名，写法等同于 FileOutputStream 路径的写法。<br>常用功能方法：<br>① void write(int n): 将单个字符写入到文件中。<br>② void write(String str): 将多个字符一次性写入到文件中<br>③ void write(char[] cs): 将 cs 数组中所有字符内容一次性写入到文件中<br>(2) FileReader: 文件字符输入流<br>常用构造方法：<br>FileReader fr &#x3D; new FileReader(“file&#x2F;a.txt”);<br>常用功能方法：<br>① int read() ：一次读取一个字符内容，将读取的字符内容存储在返回值，达到文件尾部 , 则返回 -1 。<br>② int read(char[] cs): 一次性读取多个字符的内容，将读取的字符内容自动存储在 cs 数组中，返回值<br>代表实际读取的字符个数，如果达到文件的尾部，则返回 -1.</li>
+<li>字符的过滤流【重点】<br>(1) BufferedReader :<br>常用方法： String readLine() : 一次性读取一个文本行，如果达到文件的尾部，则返回 null 。<br>&#x2F;&#x2F; 1. 创建字符节点流对象<br>FileReader fr &#x3D; new FileReader(“file&#x2F;c.txt”);<br>&#x2F;&#x2F; 2. 包装过滤流<br>BufferedReader br &#x3D; new BufferedReader(fr);<br>&#x2F;&#x2F; 3. 读操作<br>while(true){<br>String str &#x3D; br.readLine();<br>if(str &#x3D;&#x3D; null) break;<br>System.out.println(str);<br>}<br>&#x2F;&#x2F; 4. 关闭：最外层<br>br.close();<br>(2) PrintWriter:<br>① 可以操作 8 种基本数据类型<br>② 提供了自动换行和不换行的 println&#x2F;print 方法<br>println( 形式参数 ) ：自动完成换行<br> print( 形式参数 ): 不自动换行<br>③ println(Object obj)&#x2F;print(Object obj) ：将对象的 toString 方法的返回值结果写入到文件中。<br>注意：写出 ObjectOutputStream 中 writeObject(Object ob) 方法 和 PrintWriter 中 println(Object obj)<br>方法的区别。<br>解析： ObjectOutputStream 中 writeObject(Object ob) ：将对象放入流上进行传输，要求传输的对象对应的类必须实现 java.io.Serializable 接口，这个过程被称为对象序列化。<br>PrintWriter 中 println(Object obj): 将对象的 toString 方法的返回值 String 类型的结果写入文件中 ,写入的对象对应的类没有任何要求。</li>
+<li>字符的桥转流【开发重点】<br>(1) InputStreamReader: 桥转的输入流<br>OutputStreamWriter: 桥转换的输出流<br>(2) 作用：<br>a. 可以将字节流转换字符流，即字节流和字符流转换桥梁<br>b. 可以设置编解码的格式<br>(3) 应用场景：需要指定编解码格式的时候，可以利用桥转流进行指定。<br>(4) 使用步骤：<br>① 创建字节节点流对象： FileOutputStream&#x2F;FileInputStream<br>② 创建桥转换流：字节流 - 》字符流，同时指定编解码格式<br>OutputStreamWriter &#x2F; InputStreamReader<br>③ 包装过滤流：目的增强字符流的读写操作<br>PrintWriter &#x2F; BufferedReader<br>④ 读写操作<br>⑤ 关闭流：关闭最外层即可<br>五、 File 类 (java.io 包中 )</li>
+<li>File 类和 IO 流的区别。<br>(1) IO 流：对文件的内容进行操作，读取的内容或是将内容写入到文件中。<br>(2) File 类：对文件本身进行操作，例如：删除文件、更改文件名等。<br>注意： File 类本身不具有操作文件的功能，类中的方法提供了操作文件的功能。</li>
+<li>File 类中常用的方法：<br>(1) String getName() : 获取文件名，带有扩展名。<br>(2) String getAbsolutePath(): 获取绝对路径。<br>&#x2F;&#x2F; 功能：获取文件夹中所有内容，同时进行逐一判断<br>public static void selectAllEndJava(File file){<br>&#x2F;&#x2F; 获取文件夹中所有文件和文件夹<br>File[] fs &#x3D; file.listFiles();<br>&#x2F;&#x2F; 遍历：获取每一个文件或是文件夹<br>for(File f:fs){<br>&#x2F;&#x2F;判断是文件还是文件夹<br>if(f.isFile()){<br>&#x2F;&#x2F; 是文件<br>&#x2F;&#x2F; 判断文件是否 以 .java结尾<br>String name &#x3D; f.getName();<br>if(name.endsWith(“.java”)){<br>&#x2F;&#x2F; 打印输出 绝对路径<br>System.out.println(f.getAbsolutePath());<br>}<br>}else{<br>&#x2F;&#x2F; 文件夹:<br>selectAllEndJava(f);&#x2F;&#x2F; 递归<br> }<br> }</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/Xander-xz/test/main/img/202411212228867.jpg" alt="bb.jpg"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">概念</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">字节流</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">字符编码</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">字符流</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">File类</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/09/35ea27c801ea.html">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-基本数据类型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2369,6 +2369,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Map接口的特点</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">概念</a>
               </li>
              
@@ -2398,10 +2402,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态代理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Map接口的特点</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2441,18 +2441,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">TCP网络模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">用户态和内核态</a>
               </li>
              
@@ -2462,6 +2450,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">I/O多路复用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">TCP网络模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
             
             <div class="clearfix"></div>
