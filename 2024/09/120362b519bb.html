@@ -6,21 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>笔记 | Hexo</title>
+  <title>Java集合-Map接口(key-value) | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、什么是代理模式        代理模式是一种设计模式，它允许一个对象访问另外一个对象。代理对象通常通过包含真实对象的引用来控制对真实对象的操作。代理模式分为静态代理和动态代理两种。 二、静态代理1.定义        静态代理是在编译时期就确定的代理类。代理类与目标类实现相同的接口。代理类手动编写，代理类的作用是调用目标类的方法，同时可以在方法调用前后加入一些操作。 2.实现2.1 先定义一个">
+  <meta name="description" content="Map接口的特点：①KV键值对方式存储②Key键唯一，Value允许重复③无序。 Map有四个实现类：1.HashMap类2.LinkedHashMap类3.TreeMap类4.Hashtable类 1.HashMap类：存储结构：哈希表 &#x3D; 数组Node  + 链表（红黑树） 扩容方法：resize() 扩容机制：原数组的2倍 特点：①Key唯一，不允许重复②Value允许重复③无序">
 <meta property="og:type" content="article">
-<meta property="og:title" content="笔记">
-<meta property="og:url" content="http://example.com/2024/09/eef2b66eb501.html">
+<meta property="og:title" content="Java集合-Map接口(key-value)">
+<meta property="og:url" content="http://example.com/2024/09/120362b519bb.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一、什么是代理模式        代理模式是一种设计模式，它允许一个对象访问另外一个对象。代理对象通常通过包含真实对象的引用来控制对真实对象的操作。代理模式分为静态代理和动态代理两种。 二、静态代理1.定义        静态代理是在编译时期就确定的代理类。代理类与目标类实现相同的接口。代理类手动编写，代理类的作用是调用目标类的方法，同时可以在方法调用前后加入一些操作。 2.实现2.1 先定义一个">
+<meta property="og:description" content="Map接口的特点：①KV键值对方式存储②Key键唯一，Value允许重复③无序。 Map有四个实现类：1.HashMap类2.LinkedHashMap类3.TreeMap类4.Hashtable类 1.HashMap类：存储结构：哈希表 &#x3D; 数组Node  + 链表（红黑树） 扩容方法：resize() 扩容机制：原数组的2倍 特点：①Key唯一，不允许重复②Value允许重复③无序">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-09-29T06:16:42.000Z">
-<meta property="article:modified_time" content="2024-11-23T12:51:30.608Z">
+<meta property="article:published_time" content="2024-09-29T03:58:24.497Z">
+<meta property="article:modified_time" content="2024-11-23T13:05:18.990Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="什么是代理模式">
-<meta property="article:tag" content="静态代理">
-<meta property="article:tag" content="动态代理">
+<meta property="article:tag" content="Map接口的特点">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -157,137 +155,283 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-代理模式" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Java集合-Map接口-key-value" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      笔记
+      Java集合-Map接口(key-value)
     </h1>
   
 
         
-        <a href="/2024/09/eef2b66eb501.html" class="archive-article-date">
-  	<time datetime="2024-09-29T06:16:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-09-29</time>
+        <a href="/2024/09/120362b519bb.html" class="archive-article-date">
+  	<time datetime="2024-09-29T03:58:24.497Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-09-29</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>一、什么是代理模式<br>        代理模式是一种设计模式，它允许一个对象访问另外一个对象。代理对象通常通过包含真实对象的引用来控制对真实对象的操作。代理模式分为静态代理和动态代理两种。</p>
-<p>二、静态代理<br>1.定义<br>        静态代理是在编译时期就确定的代理类。代理类与目标类实现相同的接口。代理类手动编写，代理类的作用是调用目标类的方法，同时可以在方法调用前后加入一些操作。</p>
-<p>2.实现<br>2.1 先定义一个UserService的接口，其中包含两个方法select()和update()。</p>
-<p>public interface UserService {<br>    public void select();<br>    public void update();<br>}<br>2.2 UesrService接口的具体实现类：UserServiceImpl。</p>
-<pre><code>    这是真实主题(真正的业务类)：
-</code></pre>
-<p>&#x2F;&#x2F;RealSubject 真实主题(真正的业务类)<br>public class UserServiceImpl implements UserService{</p>
-<pre><code>@Override
-public void select() &#123;
-    System.out.println(&quot;查询selectById&quot;);
+        <p>Map接口的特点：①KV键值对方式存储②Key键唯一，Value允许重复③无序。</p>
+<p>Map有四个实现类：1.HashMap类2.LinkedHashMap类3.TreeMap类4.Hashtable类</p>
+<p>1.HashMap类：<br>存储结构：哈希表 &#x3D; 数组Node  + 链表（红黑树）</p>
+<p>扩容方法：resize()</p>
+<p>扩容机制：原数组的2倍</p>
+<p>特点：①Key唯一，不允许重复②Value允许重复③无序</p>
+<p>HashMap: KV键值对集合，key唯一，value允许重复<br>put()方法:添加键值对，如果key不存在，则返回null; 如果key存在，则保存新value,返回旧<br>value<br>get()方法:根据key,获取value，如果key存在，获取该元素的键值对的value值;如果不存在，<br>则获取该元素的键值对的value值为null;如果返回的value为null, 类型转换时，会发生空指针</p>
+<p>public static void main(String args) {</p>
+<pre><code>    // Map键值对集合
+    //保存城市人口信息
+    // key :城市名称.
+    // val:人口数量
+    HashMap&lt;String,Integer&gt; map = new HashMap&lt;String,Integer&gt;();
+    map.put(&quot;X咸阳&quot;,1100);
     
-&#125;
+    HashMap&lt;String,Integer&gt; anotherMap = new HashMap&lt;String,Integer&gt;();
+    anotherMap.put(&quot;B北京&quot;, 2500);
+    anotherMap.put(&quot;C长春&quot;, 300);
+    anotherMap.put(&quot;D大连&quot;, 1000);
+    map.putAll(anotherMap);
+    anotherMap.put(&quot;D大连&quot;, 1000);  //key不允许重复
+    map.put(&quot;E鄂尔多斯&quot;, 1000);//value不允许重复
+    
+    System.out.println(map);
 
-@Override
-public void update() &#123;
-    System.out.println(&quot;更新update&quot;);
-    
 &#125;
 </code></pre>
-<p>}</p>
-<p> 2.3 定义了一个名为UserServiceProxy 的静态代理类。</p>
-<p>&#x2F;&#x2F;代理<br>public class UserServiceProxy implements UserService{</p>
-<pre><code>//包含Subject真实的主题
-private UserServiceImpl realUserService = new UserServiceImpl();
+<p>输出：</p>
+<p>{D大连&#x3D;1000, E鄂尔多斯&#x3D;1000, C长春&#x3D;300, B北京&#x3D;2500, X咸阳&#x3D;1100}<br>put()与get()方法：</p>
+<p>public static void main(String args) {<br>    HashMap&lt;String,Integer&gt; cityMap &#x3D; new HashMap&lt;String,Integer&gt;();</p>
+<pre><code>//put()方法：添加键值对
+//如果key不存在，则返回null
+System.out.println(cityMap.put(&quot;X西安&quot;, 1100));
+System.out.println(cityMap.put(&quot;B北京&quot;, 2500));
+System.out.println(cityMap.put(&quot;C长春&quot;, 300));
+System.out.println(cityMap.put(&quot;D大连&quot;, 1000));
+//如果key存在，则保存新value,返回旧value
+System.out.println(cityMap.put(&quot;X西安&quot;, 1200));
 
-@Override
-public void select() &#123;
-    long begin = System.currentTimeMillis();
-    //调用真正的业务逻辑
-    realUserService.select();
-    
-    long end = System.currentTimeMillis();
-    System.out.println(&quot;select()执行耗时&quot;+(end-begin)+&quot;毫秒&quot;);
-    
-&#125;
+//get()方法：根据Key值，获取value
+//key存在
+int value1 = cityMap.get(&quot;B北京&quot;);
+System.out.println(&quot;B北京===&gt;&quot;+value1);
 
-@Override
-public void update() &#123;
-    realUserService.update();
-    
-&#125;
+//key不存在
+Integer value2 = cityMap.get(&quot;N南京&quot;);
+System.out.println(&quot;N南京&quot;+value2);
 
-    这个代理类实现了UserService接口，并包含了一个UserServiceImpl 对象来执行实际的业务逻辑。在代理类中，可以在调用真实业务逻辑之前或之后添加额外的操作。
-</code></pre>
-<p>2.4 静态代理的优缺点：</p>
-<p>优点：</p>
-<p>编译期检查，容易发现问题。<br>代码清晰易读，易于维护。<br>缺点：</p>
-<p>不灵活，修改或扩展目标类需要同时修改代理类。<br>存在大量的重复代码。<br>三、动态代理<br>1 定义<br>        动态代理是在运行时生成代理类的。与静态代理不同，动态代理不需要手动编写代理类，而是使用Java的反射机制动态生成代理类。</p>
-<p>2 实现<br>2.1 先定义一个OrderService 接口。</p>
-<p>public interface OrderService {<br>    public void create(int money,int uid);</p>
-<p>}<br>2.2  OrderService接口的具体实现类：OrderServiceImpl 。</p>
-<p>public class OrderServiceImpl implements OrderService{</p>
-<pre><code>@Override
-public void create(int money, int uid) &#123;
-    System.out.println(&quot;订单被创建&quot;);
+//如果返回的value为null,类型转换时，会发生空指针
+int value3 = cityMap.get(&quot;N南京&quot;);
 &#125;
 </code></pre>
-<p>}<br> 2.3 定义了一个 PerformanceInvocationHandler 类。</p>
-<p>&#x2F;&#x2F;用于检测方法执行性能的Handler执行器<br>public class PerformanceInvocationHandler implements InvocationHandler{<br>    private Object real;</p>
-<pre><code>public PerformanceInvocationHandler(Object real) &#123;
-    this.real = real;
-&#125;
-/**
- * 参数proxy: 代理对象
- * 参数method:当前执行的方法对象
- * 参数args:参数列表
- * */
-@Override
-public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;
-    long begin = System.currentTimeMillis();
+<p> 输出：</p>
+<p>null<br>null<br>null<br>null<br>1100<br>B北京&#x3D;&#x3D;&#x3D;&gt;2500<br>N南京null<br>Exception in thread “main” java.lang.NullPointerException<br>    at com.zad.day24_1_26_01.Text08.main(Text08.java:28)<br>遍历map:</p>
+<p>遍历Map<br>方式1:获取所有的key,然后按照每个key获取对应的value<br>方式2:获取所有的value<br>方式3:将每个KV键值对按照Entry类型的对象，统一获取</p>
+<p>方式1 :获取所有的key,然后按照每个key获取对应的value</p>
+<p>public static void main(String args) {<br>        HashMap&lt;String,String&gt; map &#x3D; new HashMap&lt;String,String&gt;();</p>
+<pre><code>    map.put(&quot;华语&quot;, new String[] &#123; &quot;林俊杰&quot;, &quot;陈奕迅&quot;, &quot;邓紫棋&quot;, &quot;薛之谦&quot;, &quot;汪苏泷&quot;, &quot;李荣浩&quot; &#125;);
+    map.put(&quot;欧美&quot;, new String[] &#123; &quot;贾斯丁比伯&quot;, &quot;威肯&quot;, &quot;艾兰沃克&quot;, &quot;德雷克&quot; &#125;);
+    map.put(&quot;乐队&quot;, new String[] &#123; &quot;魔力红&quot;, &quot;烟鬼组合&quot;, &quot;共和时代&quot;, &quot;辅音组合&quot;, &quot;Linkin Park&quot;, &quot;Westlife&quot; &#125;);
     
-    //真实业务对象当前的执行方法(基于反射的方式)
-    Object returnValue = method.invoke(real, args);
+    //遍历Map
+    //方式1：获取所有的key,然后按照每个key获取对应的value
+    Set&lt;String&gt; keys = map.keySet();//获取map中所有的key
     
-    long end = System.currentTimeMillis();
+    System.out.println(&quot;所有的key:&quot;+keys);
+    System.out.println(&quot;按照每个key,获取对应的value&quot;);
     
-    System.out.println(&quot;方法执行耗时&quot;+(end - begin)+&quot;毫秒！&quot;);
+    Iterator&lt;String&gt; it = keys.iterator();
+    while(it.hasNext()) &#123;
+        String key = it.next();//获取每个key
+        String[] val = map.get(key);//按照key获取对应的value
+        System.out.printf(&quot;%s ---&gt; %s  \n&quot;,key,Arrays.toString(val));	
+    &#125;
     
-    return returnValue;
+    
+    
 &#125;
 </code></pre>
-<p>}</p>
-<pre><code>     PerformanceInvocationHandler类实现了InvocationHandler接口，用于动态代理模式中监控方法的执行性能。
+<p>输出：</p>
+<p>所有的key:华语, 乐队, 欧美<br>按照每个key,获取对应的value<br>华语 —&gt; 林俊杰, 陈奕迅, 邓紫棋, 薛之谦, 汪苏泷, 李荣浩<br>乐队 —&gt; 魔力红, 烟鬼组合, 共和时代, 辅音组合, Linkin Park, Westlife<br>欧美 —&gt; 贾斯丁比伯, 威肯, 艾兰沃克, 德雷克<br>方式2：获取所有的value</p>
+<p>public static void main(String args) {<br>        HashMap&lt;String,String&gt; map &#x3D; new HashMap&lt;String,String&gt;();</p>
+<pre><code>    map.put(&quot;华语&quot;, new String[] &#123; &quot;林俊杰&quot;, &quot;陈奕迅&quot;, &quot;邓紫棋&quot;, &quot;薛之谦&quot;, &quot;汪苏泷&quot;, &quot;李荣浩&quot; &#125;);
+    map.put(&quot;欧美&quot;, new String[] &#123; &quot;贾斯丁比伯&quot;, &quot;威肯&quot;, &quot;艾兰沃克&quot;, &quot;德雷克&quot; &#125;);
+    map.put(&quot;乐队&quot;, new String[] &#123; &quot;魔力红&quot;, &quot;烟鬼组合&quot;, &quot;共和时代&quot;, &quot;辅音组合&quot;, &quot;Linkin Park&quot;, &quot;Westlife&quot; &#125;);
+    
+    //遍历map
+    //方式2：获取所有的value
+    Collection&lt;String[]&gt; values=map.values();
+    for(String[] array:values) &#123;
+        System.out.println(Arrays.toString(array));
+    &#125;
 
-    invoke方法：该方法的作用是在方法调用前后添加额外的功能，例如计算方法的执行时间。
-
-    在 invoke 方法中，使用反射机制调用真实业务对象的目标方法 method.invoke(real, args)，并记录执行时间。最后，将执行耗时打印出来。
-</code></pre>
-<p>2.4 使用 Java 动态代理来为OrderServiceImpl 类生成代理对象，并在方法调用前后进行性能监控。</p>
-<p>public class Text01 {<br>    public static void main(String[] args) {<br>        &#x2F;&#x2F;真实的主题对象<br>        OrderServiceImpl realOrderService &#x3D; new OrderServiceImpl();</p>
-<pre><code>    //获取类加载器
-    ClassLoader classLoader = realOrderService.getClass().getClassLoader();
     
-    //接口列表
-    Class[] interfaces = realOrderService.getClass().getInterfaces();
-    
-    //创建InvocationHandler对象(动态代理对象的执行逻辑)
-    PerformanceInvocationHandler h = new PerformanceInvocationHandler(realOrderService);
-    
-    //创建一个代理对象(动态代理对象)
-    OrderService orderServiceProxy = (OrderService) Proxy.newProxyInstance(classLoader, interfaces, h);
-    
-    //调用方法
-    orderServiceProxy.create(1234, 0001);	
 &#125;
 </code></pre>
-<p>}</p>
-<pre><code>    使用Proxy.newProxyInstance方法创建代理对象。这个代理对象会实现OrderService接口，
+<p>输出：</p>
+<p>林俊杰, 陈奕迅, 邓紫棋, 薛之谦, 汪苏泷, 李荣浩<br>魔力红, 烟鬼组合, 共和时代, 辅音组合, Linkin Park, Westlife<br>贾斯丁比伯, 威肯, 艾兰沃克, 德雷克<br> 方式3：将每个KV键值对按照Entry类型的对象，统一获取</p>
+<p>public static void main(String args) {<br>        HashMap&lt;String, String&gt; map &#x3D; new HashMap&lt;String, String&gt;();</p>
+<pre><code>    map.put(&quot;华语&quot;, new String[] &#123; &quot;林俊杰&quot;, &quot;陈奕迅&quot;, &quot;邓紫棋&quot;, &quot;薛之谦&quot;, &quot;汪苏泷&quot;, &quot;李荣浩&quot; &#125;);
+    map.put(&quot;欧美&quot;, new String[] &#123; &quot;贾斯丁比伯&quot;, &quot;威肯&quot;, &quot;艾兰沃克&quot;, &quot;德雷克&quot; &#125;);
+    map.put(&quot;乐队&quot;, new String[] &#123; &quot;魔力红&quot;, &quot;烟鬼组合&quot;, &quot;共和时代&quot;, &quot;辅音组合&quot;, &quot;Linkin Park&quot;, &quot;Westlife&quot; &#125;);
+    
+    //遍历Map
+    //方式3：将每个KV键值对按照Entry类型的对象，统一获取
+    Set&lt;Entry&lt;String,String[]&gt;&gt; entrys = map.entrySet();
+    for(Entry&lt;String,String[]&gt;  keyValue:entrys) &#123;
+        System.out.printf(&quot;%s---&gt;%s\n&quot;,keyValue.getKey(),Arrays.toString(keyValue.getValue()));
+    &#125;
+&#125;
 </code></pre>
-<p>并在调用方法时使用PerformanceInvocationHandler 中的invoke方法来处理。</p>
-<p>四、静态代理与动态代理<br>对比维度	静态代理	动态代理<br>实现方式	代理类在编译期确定	代理类在运行时动态生成<br>代理类的数量	每个目标类对应一个代理类	一个代理类可以代理多个目标类<br>编写难度	需要手动编写代理类，重复代码多	只需编写一个InvocationHandler实现类<br>性能	性能较高，不涉及反射	性能较低，依赖反射机制<br>灵活性	不灵活，目标类变化时代理类需同步修改	灵活，目标类变化时无需修改代理类<br>五、总结<br>静态代理适用于结构简单、需求明确的场景，如对固定业务逻辑的增强。<br>动态代理适用于复杂、需求变化频繁的场景，特别是在AOP（面向切面编程）中应用广泛。</p>
+<p> 输出：</p>
+<p>华语—&gt;林俊杰, 陈奕迅, 邓紫棋, 薛之谦, 汪苏泷, 李荣浩<br>乐队—&gt;魔力红, 烟鬼组合, 共和时代, 辅音组合, Linkin Park, Westlife<br>欧美—&gt;贾斯丁比伯, 威肯, 艾兰沃克, 德雷克<br>常用方法：</p>
+<p>判断key是否存在: containsKey()方法<br>根据key获取value,如果key不存在，则返回default默认值: getOrDefault()方法<br>根据key,删除KV键值对:remove()方法<br>获取键值对的数量:size()方法<br>public static void main(String args) {<br>        &#x2F;&#x2F;歌手分类<br>        HashMap&lt;String, String&gt; map&#x3D;new HashMap&lt;String, String&gt;();</p>
+<pre><code>    map.put(&quot;华语&quot;, new String[] &#123; &quot;林俊杰&quot;, &quot;陈奕迅&quot;, &quot;邓紫棋&quot;, &quot;薛之谦&quot;, &quot;汪苏泷&quot;, &quot;李荣浩&quot; &#125;);
+    map.put(&quot;欧美&quot;, new String[] &#123; &quot;贾斯丁比伯&quot;, &quot;威肯&quot;, &quot;艾兰沃克&quot;, &quot;德雷克&quot; &#125;);
+    map.put(&quot;乐队&quot;, new String[] &#123; &quot;魔力红&quot;, &quot;烟鬼组合&quot;, &quot;共和时代&quot;, &quot;辅音组合&quot;, &quot;Linkin Park&quot;, &quot;Westlife&quot; &#125;);
+    
+    //判断key是否存在
+    boolean isContains = map.containsKey(&quot;日韩&quot;);
+    System.out.println(isContains);
+    
+    //根据key获取value，如果key不存在，则返回default默认值
+    String[] value = map.getOrDefault(&quot;日韩&quot;, new String[] &#123;&#125;);
+    System.out.println(Arrays.toString(value));
+    
+    //根据key，删除KV键值对
+    map.remove(&quot;欧美&quot;);
+    System.out.println(map);
+    
+    //获取键值对的数量
+    int size = map.size();
+    System.out.println(size);
+&#125;
+</code></pre>
+<p> 输出：</p>
+<p>false</p>
+<p>{华语&#x3D;Ljava.lang.String;@3d8c7aca, 乐队&#x3D;Ljava.lang.String;@5ebec15}<br>2<br> 应用例：统计英文字母、中文、数字、标点符号的个数</p>
+<p>public static void main(String args) {<br>        &#x2F;&#x2F;统计英文字母、中文、数字、标点符号的个数<br>        String str &#x3D; “OMG,你们的中英混搭真是各有千秋,但Someone丝毫掩盖不了你们那硬朗的英语底子！For eg.papi酱真的very有才华啊，哦买噶的，U6666666!!!罢特，someone也是成功地掩盖了自己小学程度的英语水平!这样式的，I是不会use的，because l hate 这种人very much~”;</p>
+<pre><code>    //统计结果，保存到map中
+    HashMap&lt;String, Integer&gt; map = new HashMap&lt;String, Integer&gt;();
+</code></pre>
+<p>&#x2F;&#x2F;		map.put(“letters”, 0);<br>&#x2F;&#x2F;		map.put(“numbers”, 0);<br>&#x2F;&#x2F;		map.put(“chinese”, 0);<br>&#x2F;&#x2F;		map.put(“flags”, 0);</p>
+<pre><code>    // 遍历字符串，判断每个字符
+    for (int i = 0; i &lt; str.length(); i++) &#123;
+        // 获取每一个字符
+        char c = str.charAt(i);
+
+        if (c &gt;= &#39;A&#39; &amp;&amp; c &lt; &#39;Z&#39; || c &gt; &#39;a&#39; &amp;&amp; c &lt; &#39;z&#39;) &#123;
+            //获取一个字符
+            int oldValue = map.getOrDefault(&quot;letters&quot;, 0);
+            int newValue = oldValue + 1;
+            map.put(&quot;letters&quot;, newValue);
+        &#125; else if (c &gt; &#39;0&#39; &amp;&amp; c &lt; &#39;9&#39;) &#123;
+            map.put(&quot;numbers&quot;, map.getOrDefault(&quot;numbers&quot;, 0)+1);
+        &#125; else if (c &gt;= 0x4e00 &amp;&amp; c &lt;= 0x29fa5) &#123;
+            map.put(&quot;chinese&quot;, map.getOrDefault(&quot;chinese&quot;, 0) + 1);
+        &#125; else &#123;
+            map.put(&quot;flags&quot;, map.getOrDefault(&quot;flags&quot;, 0)+ 1);
+        &#125;
+    &#125;
+    System.out.println(map);
+
+&#125;
+</code></pre>
+<p>输出：</p>
+<p>{chinese&#x3D;79, flags&#x3D;16, numbers&#x3D;7, letters&#x3D;52}<br>2.LinkedHashMap类：<br>存储结构：数组+链表+红黑树，，维护使用链表，记录顺序</p>
+<p>特点：①Key唯一，不允许重复②Value允许重复③有序④LinkedHashMap是HashMap的子类</p>
+<p> 应用例:统计每个字符出现的次数</p>
+<p>public static void main(String args) {<br>        &#x2F;&#x2F;统计每个字符出现的次数<br>        &#x2F;&#x2F;无序<br>        String str &#x3D; “qurfkjcbsdjqpiurfufhdvlajydfgquyvhvaljhvqouygqhvhv”;<br>&#x2F;&#x2F;		HashMap&lt;String,Integer&gt; map1 &#x3D; new HashMap&lt;String, Integer&gt;();<br>        &#x2F;&#x2F;有序<br>        LinkedHashMap&lt;String,Integer&gt; map2 &#x3D; new LinkedHashMap&lt;String, Integer&gt;();</p>
+<pre><code>    for(int i = 0;i&lt;str.length();i++) &#123;
+        String key = str.substring(i,i+1);
+        
+        //判断key是否存在
+        if(map2.containsKey(key)) &#123;
+            //该字符(key)存在
+            map2.put(key, map2.get(key)+1);
+        &#125;else &#123;
+            //该字符不存在
+            map2.put(key, 1);
+        &#125;
+    &#125;
+    System.out.println(map2);
+    
+    
+&#125;
+</code></pre>
+<p> 输出：</p>
+<p>{q&#x3D;5, u&#x3D;5, r&#x3D;2, f&#x3D;4, k&#x3D;1, j&#x3D;4, c&#x3D;1, b&#x3D;1, s&#x3D;1, d&#x3D;3, p&#x3D;1, i&#x3D;1, h&#x3D;5, v&#x3D;6, l&#x3D;2, a&#x3D;2, y&#x3D;3, g&#x3D;2, o&#x3D;1}<br>3.TreeMap类：<br>特点：①Key唯一，不允许重复②Value允许重复③按照Key自动排序④AbstractMap的子类</p>
+<p>存储结构：树中的每个节点均是Entry内部类对象（红黑树）</p>
+<p>例：按照key自动排序，通过key进行比较后排序！！！</p>
+<p>public static void main(String args) {<br>        &#x2F;&#x2F;HashMap:无序，按照key计算保存位置<br>        &#x2F;&#x2F;HashMap&lt;String,String&gt; map &#x3D; new HashMap&lt;String,String&gt;();</p>
+<pre><code>    // TreeMap:按照key自动排序，通过key进行比较后排序
+    TreeMap&lt;String, String&gt; map = new TreeMap&lt;String, String&gt;();
+
+    map.put(&quot;SN201&quot;, &quot;A1&quot;);
+    map.put(&quot;SN111&quot;, &quot;A2&quot;);
+    map.put(&quot;SN107&quot;, &quot;A3&quot;);
+    map.put(&quot;SN191&quot;, &quot;A4&quot;);
+    map.put(&quot;SN100&quot;, &quot;A5&quot;);
+    map.put(&quot;SN103&quot;, &quot;A6&quot;);
+    map.put(&quot;SN2011&quot;, &quot;A7&quot;);
+    map.put(&quot;SN1031&quot;, &quot;A8&quot;);
+    map.put(&quot;SN1231&quot;, &quot;A9&quot;);
+
+    for (Entry&lt;String, String&gt; entry : map.entrySet()) &#123;
+        System.out.println(entry.getKey() + &quot;:&quot; + entry.getValue());
+    &#125;
+&#125;
+</code></pre>
+<p> 输出：</p>
+<p>SN100:A5<br>SN103:A6<br>SN1031:A8<br>SN107:A3<br>SN111:A2<br>SN1231:A9<br>SN191:A4<br>SN201:A1<br>SN2011:A7<br> 调用TreeMap&lt;&gt;()的有参构造方法，重写compare()方法，按照大小排序</p>
+<p>public static void main(String args) {<br>        &#x2F;&#x2F;HashMap:无序，按照key计算保存位置<br>        &#x2F;&#x2F;HashMap&lt;String,String&gt; map &#x3D; new HashMap&lt;String,String&gt;();</p>
+<pre><code>    // TreeMap:按照key自动排序，通过key进行比较后排序
+    TreeMap&lt;String, String&gt; map = new TreeMap&lt;String, String&gt;(new Comparator&lt;String&gt;() &#123;
+
+        @Override
+        public int compare(String o1, String o2) &#123;
+            int n1 = Integer.parseInt(o1.substring(2));
+            int n2 = Integer.parseInt(o2.substring(2));
+
+            return n1 - n2;
+        &#125;
+    &#125;);
+
+    map.put(&quot;SN201&quot;, &quot;A1&quot;);
+    map.put(&quot;SN111&quot;, &quot;A2&quot;);
+    map.put(&quot;SN107&quot;, &quot;A3&quot;);
+    map.put(&quot;SN191&quot;, &quot;A4&quot;);
+    map.put(&quot;SN100&quot;, &quot;A5&quot;);
+    map.put(&quot;SN103&quot;, &quot;A6&quot;);
+    map.put(&quot;SN2011&quot;, &quot;A7&quot;);
+    map.put(&quot;SN1031&quot;, &quot;A8&quot;);
+    map.put(&quot;SN1231&quot;, &quot;A9&quot;);
+
+    for (Entry&lt;String, String&gt; entry : map.entrySet()) &#123;
+        System.out.println(entry.getKey() + &quot;:&quot; + entry.getValue());
+    &#125;
+&#125;
+</code></pre>
+<p>输出：</p>
+<p>SN100:A5<br>SN103:A6<br>SN107:A3<br>SN111:A2<br>SN191:A4<br>SN201:A1<br>SN1031:A8<br>SN1231:A9<br>SN2011:A7<br>4.Hashtable类<br>特点：①Key唯一，不允许重复②Value允许重复③key 和 value不允许为空，如果为null，则抛出NullPointerExceptino④线程安全，使用synchronized加锁，性能较差</p>
+<p>存储结构：数组+链表</p>
+<p>允许使用null做key<br>不允许使用null做value<br>public static void main(String args) {</p>
+<pre><code>    HashMap&lt;String, String&gt; map=new HashMap&lt;String, String&gt;();
+    map.put(null, &quot;巴黎世家&quot;);//不允许使用null做key
+    map.put(&quot;AAA&quot;, null);//允许使用null做value
+    System.out.println(map);
+    
+    Hashtable&lt;String, String&gt; table=new Hashtable&lt;String, String&gt;();
+    table.put(null, &quot;巴黎世家&quot;);//不允许使用null做key
+    table.put(&quot;AAA&quot;, null);//不允许使用null做value
+    System.out.println(table);
+    &#125;
+</code></pre>
+<p>输出：</p>
+<p>{null&#x3D;巴黎世家, AAA&#x3D;null}<br>Exception in thread “main” java.lang.NullPointerException<br>    at java.util.Hashtable.put(Hashtable.java:465)<br>    at com.zad.day24_1_26_01.Text15.main(Text15.java:15)</p>
 
       
 
@@ -322,15 +466,7 @@ public Object invoke(Object proxy, Method method, Object[] args) throws Throwabl
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">什么是代理模式</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">静态代理</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态代理</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Map接口的特点</a>
         		</li>
       		
 		</ul>
@@ -386,7 +522,7 @@ public Object invoke(Object proxy, Method method, Object[] args) throws Throwabl
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2024/09/eef2b66eb501.html" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2024/09/120362b519bb.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -537,6 +673,22 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">什么是Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">基本操作</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">List集合的特点</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">主要方法</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">概念</a>
               </li>
              
@@ -557,19 +709,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">什么是Docker</a>
+                <a href="javascript:void(0)" class="js-tag color3">什么是代理模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">基本操作</a>
+                <a href="javascript:void(0)" class="js-tag color5">静态代理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">List集合的特点</a>
+                <a href="javascript:void(0)" class="js-tag color5">动态代理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">主要方法</a>
+                <a href="javascript:void(0)" class="js-tag color4">Map接口的特点</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -601,39 +753,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">什么是代理模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">静态代理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">动态代理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Map接口的特点</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">基本数据类型</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">结构化程序设计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">用户态和内核态</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存泄漏和内存溢出</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">I/O多路复用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -646,6 +770,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">用户态和内核态</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">内存泄漏和内存溢出</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">I/O多路复用</a>
               </li>
             
             <div class="clearfix"></div>
