@@ -1085,6 +1085,213 @@
 
 
   
+    <article id="post-Java集合-ArrayList" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/09/c85dc3900c4e.html">Java集合-ArrayList</a>
+    </h1>
+  
+
+        
+        <a href="/2024/09/c85dc3900c4e.html" class="archive-article-date">
+  	<time datetime="2024-09-29T06:16:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-09-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>集合就是一个保存数据的容器。在计算机中引入集合，是为了便于处理一组类似的数据。Java标准库自带的java.util包提供了集合相关的接口和实现类：Collection接口，它是除了Map接口外所有其他集合类的根接口。</p>
+<p>Java的Java.uitl包主要提供以下三种类型的集合：</p>
+<p>List:一种有序表的集合；<br>Set:一种保证没有重复元素的集合<br>Map:一种通过键值对查找的映射表集合。<br>Java集合的设计有几个特点：首先实现了接口和实现类相分离，比如：有序表的接口是List,具体的实现类有ArrayList、LinkedLis、Vectort;其次支持泛型，我们可以限制在一个集合中只能放入同一种数据类型的元素。 </p>
+<p>一、List集合<br>List集合的特点：有序、允许重复。</p>
+<p>List的行为和数组几乎完全相同：List 内部按照放入元素的先后顺存放,每个元素都可以通过索引确定自己的位置，List的索引和数组一样,从0开始。</p>
+<p>List的实现类：ArrayList、LinkedList、Vector。</p>
+<p>1.ArrayList的内部数据结构是Object[]数组<br>特点：</p>
+<pre><code>    1.初始化为一个空数组&#123; &#125;
+</code></pre>
+<p>内部源码为：</p>
+<p> public ArrayList() {<br>    this.elementData &#x3D; DEFAULTCAPACITY_EMPTY_ELEMENTDATA;<br> }<br>        2.第一次添加元素时，该数组扩容为10<br>        3.数组容量不足时，该数组的容量扩容为原容量的1.5倍。扩容方法：grow()<br>int newCapacity &#x3D; oldCapacity + (oldCapacity &gt;&gt; 1);<br>2.主要方法。<br>方法1：add(E e)  作用：添加新元素至集合的尾部</p>
+<p>方法2：add(int index,E e) 作用：添加新元素至集合的指定位置</p>
+<p>方法3：addAll(Collection c)  作用：添加另一个集合中所有的元素至当前集合的尾部</p>
+<p>方法4：addAll(int index,Collection c)  作用：添加另一个集合中所有的元素至当前集合指定位置</p>
+<p>public static void main(String[] args) {</p>
+<pre><code>    //创建集合对象
+    ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
+    
+    //操作1：添加新元素
+    //add(E e)方法：添加新元素至集合的尾部
+    list.add(&quot;小乔&quot;);
+    list.add(&quot;曹操&quot;);
+    list.add(&quot;刘备&quot;);
+    list.add(&quot;后裔&quot;);
+    System.out.println(list);
+    
+    //add(int index,E e)方法：添加新元素至集合的指定位置
+    list.add(0, &quot;李白&quot;);
+    System.out.println(list);
+    
+    //addAll(Collection c)方法
+    //addAll(int index,Collection c)方法
+    //添加另一个集合中所有的元素至当前集合
+    ArrayList&lt;String&gt; subList = new ArrayList&lt;String&gt;();
+    subList.add(&quot;孙悟空&quot;);
+    subList.add(&quot;猪八戒&quot;);
+    subList.add(&quot;白骨精&quot;);
+    
+    //将subList中的所有元素添加至list集合的尾部
+</code></pre>
+<p>&#x2F;&#x2F;		list.addAll(subList);<br>        list.addAll(1,subList);<br>        System.out.println(list);</p>
+<pre><code>&#125;
+</code></pre>
+<p> 输出：</p>
+<p>小乔, 曹操, 刘备, 后裔<br>李白, 小乔, 曹操, 刘备, 后裔<br>李白, 孙悟空, 猪八戒, 白骨精, 小乔, 曹操, 刘备, 后裔<br>方法5：get(int index)   作用：获取元素（按照下标位置，获取元素）</p>
+<p>方法6：remove(int index)  作用：按照下标删除元素</p>
+<pre><code>         remove(Object value)  作用：按照值删除
+</code></pre>
+<p>方法7：indexOf(Object o)  作用：查找元素</p>
+<p>方法8：set(int index,E e)  作用：按照下标，修改对应元素。</p>
+<p>&#x2F;&#x2F;创建临时的List集合<br>List<String> boyList &#x3D; Arrays.asList(“YK”,”QTZ”,”CBY”,”ZRZ”,”YWQ”);<br>&#x2F;&#x2F;全部添加至ArrayList集合中<br>ArrayList<String> list &#x3D; new ArrayList<String>();<br>list.addAll(boyList);<br>System.out.println(list);</p>
+<p>&#x2F;&#x2F;操作2：获取元素(按照下标位置，获取元素)<br>&#x2F;&#x2F;get(int index)<br> String first &#x3D; list.get(0);<br>String last &#x3D; list.get(list.size()-1);<br>System.out.println(“首元素：”+first);<br>System.out.println(“为元素:”+last);</p>
+<p>&#x2F;&#x2F;操作3：删除元素(按照下标或值，进行删除)<br>&#x2F;&#x2F;remove(int index)按照下标删除<br>&#x2F;&#x2F;remove(Object value) 按照值删除<br>System.out.println(“删除前：”+list);</p>
+<p>&#x2F;&#x2F;list.remove(1);  &#x2F;&#x2F;按照下标删除<br>list.remove(“YWQ”); &#x2F;&#x2F;按照值删除</p>
+<p>System.out.println(“删除后：”+list);</p>
+<p>&#x2F;&#x2F;操作4：查找元素<br>&#x2F;&#x2F;indexOf(Object o)<br>int index1 &#x3D; list.indexOf(“ZWY”);<br>System.out.println(“查找一个不存在的元素：”+index1);</p>
+<p>int index2 &#x3D; list.indexOf(“YK”);<br>System.out.println(“查找一个已存在的元素:”+index2);<br>&#x2F;&#x2F;操作5：修改元素<br>&#x2F;&#x2F;set(int index,E e);</p>
+<p>System.out.println(“修改前：”+list);<br>list.set(1, “QQQ”);<br>System.out.println(“修改后：”+list);</p>
+<p>输出：</p>
+<p>[YK, QTZ, CBY, ZRZ, YWQ]<br>首元素：YK<br>为元素:YWQ<br>删除前：[YK, QTZ, CBY, ZRZ, YWQ]<br>删除后：[YK, QTZ, CBY, ZRZ]<br>查找一个不存在的元素：-1<br>查找一个已存在的元素:0<br>修改前：[YK, QTZ, CBY, ZRZ]<br>修改后：[YK, QQQ, CBY, ZRZ]<br>方法9：list.clear()   作用：清空集合内的所有元素</p>
+<p>方法10：isContains(E e)   作用：查看元素是否存在</p>
+<p>方法11：subList(int index,int index)  作用：截取子集合</p>
+<p>方法12：toArray()  作用：将集合转换成数组</p>
+<p>方法13：toArray(T[ ] a)  作用：将集合转换成数组</p>
+<p>public static void main(String[] args) {<br>        List<String> boyList &#x3D; Arrays.asList(“YK”,”QTZ”,”CBY”,”ZRZ”,”YWQ”);</p>
+<pre><code>    //全部添加至ArrayList集合中
+    ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();
+    list.addAll(boyList);
+    System.out.println(list);
+    
+    //查看元素是否存在
+    boolean isContains = list.contains(&quot;yangQi&quot;);
+    System.out.println(isContains);
+    
+    //截取子集合
+     List&lt;String&gt; subs = list.subList(0, 3);
+     System.out.println(subs);
+    
+    //转换成数组
+    Object[] array1 = list.toArray();//Object数组
+    String[] array2 = list.toArray(new String[list.size()]); //String数组
+    
+    System.out.println(Arrays.toString(array1));
+    System.out.println(Arrays.toString(array2));
+</code></pre>
+<p>&#x2F;&#x2F;		<br>        &#x2F;&#x2F;清空<br>        list.clear();<br>        System.out.println(list);</p>
+<pre><code>&#125;
+</code></pre>
+<p>输出：</p>
+<p>[YK, QTZ, CBY, ZRZ, YWQ]<br>false<br>[YK, QTZ, CBY]<br>[YK, QTZ, CBY, ZRZ, YWQ]<br>[YK, QTZ, CBY, ZRZ, YWQ]<br>[]<br>3.数组的遍历<br>遍历方法1：冒泡排序<br>public static void main(String[] args) {<br>        ArrayList<String> list &#x3D; new ArrayList<String>();<br>        list.addAll(Arrays.asList(“E”,”D”,”K”,”M”,”N”,”A”));</p>
+<pre><code>    //方式1:冒泡排序
+    for(int i = 0;i&lt;list.size()-1;i++) &#123;
+        for(int k = 0;k&lt;list.size()-1-i;k++) &#123;
+            if(list.get(k).compareTo(list.get(k+1))&gt;0) &#123;
+                String temp = list.get(k);
+                list.set(k, list.get(k+1));
+                list.set(k+1, temp);
+            &#125;
+        &#125;
+    &#125;
+    
+&#125;
+</code></pre>
+<p>输出：</p>
+<p>[A, D, E, K, M, N]<br>遍历方法2：使用sort()方法<br>public static void main(String[] args) {<br>        ArrayList<String> list &#x3D; new ArrayList<String>();<br>        list.addAll(Arrays.asList(“E”,”D”,”K”,”M”,”N”,”A”));</p>
+<pre><code>    //方式2：使用sort()方法
+    list = new ArrayList&lt;String&gt;();
+    list.addAll(Arrays.asList(&quot;E&quot;,&quot;D&quot;,&quot;K&quot;,&quot;M&quot;,&quot;N&quot;,&quot;A&quot;));
+    list.sort(new Comparator&lt;String&gt;() &#123;
+
+        @Override
+        public int compare(String o1, String o2) &#123;
+            
+            return o1.compareTo(o2);
+        &#125;
+        
+    &#125;);
+    System.out.println(list);
+&#125;
+</code></pre>
+<p>输出：</p>
+<p>[A, D, E, K, M, N]<br>4.通过创建ArrayList集合<br>        1.通过[无参构造方法]创建ArrayList集合<br>        &#x2F;&#x2F;通过[无参构造方法]创建ArrayList集合<br>        &#x2F;&#x2F;数组默认被初始化成一个空数组<br>        ArrayList<Integer> list1 &#x3D; new ArrayList<Integer>();<br>        list1.add(5178);&#x2F;&#x2F;添加第1个元素时,将数组扩容为10<br>        list1.add(1852);&#x2F;&#x2F;添加第2个元素<br>        list1.add(1555);&#x2F;&#x2F;添加。。。个元素<br>        list1.add(9527);&#x2F;&#x2F;添加第10个元素</p>
+<pre><code>    //添加第11个元素时，容量不足，再次将数组扩容，按照原容量的1.5倍
+    list1.add(1024);
+    2.通过[有参构造方法]创建Arraylist集合
+    ArrayList&lt;Integer&gt; list2 = new ArrayList&lt;Integer&gt;(200);
+    
+    //创建集合时，传入另外一-个Collection集合， 并H.按照该集合的元素进行初始化
+    ArrayList&lt;Integer&gt; list3 = new ArrayList&lt;Integer&gt;(Arrays.asList(1,2,3));
+</code></pre>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">List集合的特点</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">主要方法</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/09/c85dc3900c4e.html">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-代理模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1248,85 +1455,6 @@ public Object invoke(Object proxy, Method method, Object[] args) throws Throwabl
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2024/09/eef2b66eb501.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-测试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/09/3188e61ff822.html">测试</a>
-    </h1>
-  
-
-        
-        <a href="/2024/09/3188e61ff822.html" class="archive-article-date">
-  	<time datetime="2024-09-29T06:16:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-09-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="https://raw.githubusercontent.com/Xander-xz/test/main/img/202411212226185.jpg" alt="445566.jpg"></p>
-<p>内容<br>内容<br>内容</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">测试tage</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">第二个tage</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/09/3188e61ff822.html">展开全文 >></a>
         </p>
       
 
@@ -1994,6 +2122,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">什么是Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">基本操作</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">概念</a>
               </li>
              
@@ -2014,19 +2150,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">什么是Docker</a>
+                <a href="javascript:void(0)" class="js-tag color5">List集合的特点</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">基本操作</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">基本数据类型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">结构化程序设计</a>
+                <a href="javascript:void(0)" class="js-tag color5">主要方法</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2039,38 +2167,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态代理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">测试tage</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">第二个tage</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">用户态和内核态</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存泄漏和内存溢出</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">I/O多路复用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">TCP网络模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2099,6 +2195,38 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">反射的常见场景</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">基本数据类型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">结构化程序设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">TCP网络模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">用户态和内核态</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">内存泄漏和内存溢出</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">I/O多路复用</a>
               </li>
             
             <div class="clearfix"></div>
