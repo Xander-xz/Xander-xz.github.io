@@ -1085,19 +1085,19 @@
 
 
   
-    <article id="post-未命名-3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-代理模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2024/09/1d8cd3fa57af.html">笔记</a>
+      <a class="article-title" href="/2024/09/eef2b66eb501.html">笔记</a>
     </h1>
   
 
         
-        <a href="/2024/09/1d8cd3fa57af.html" class="archive-article-date">
+        <a href="/2024/09/eef2b66eb501.html" class="archive-article-date">
   	<time datetime="2024-09-29T06:16:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-09-29</time>
 </a>
         
@@ -1105,7 +1105,117 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>这是一个笔记</p>
+        <p>一、什么是代理模式<br>        代理模式是一种设计模式，它允许一个对象访问另外一个对象。代理对象通常通过包含真实对象的引用来控制对真实对象的操作。代理模式分为静态代理和动态代理两种。</p>
+<p>二、静态代理<br>1.定义<br>        静态代理是在编译时期就确定的代理类。代理类与目标类实现相同的接口。代理类手动编写，代理类的作用是调用目标类的方法，同时可以在方法调用前后加入一些操作。</p>
+<p>2.实现<br>2.1 先定义一个UserService的接口，其中包含两个方法select()和update()。</p>
+<p>public interface UserService {<br>    public void select();<br>    public void update();<br>}<br>2.2 UesrService接口的具体实现类：UserServiceImpl。</p>
+<pre><code>    这是真实主题(真正的业务类)：
+</code></pre>
+<p>&#x2F;&#x2F;RealSubject 真实主题(真正的业务类)<br>public class UserServiceImpl implements UserService{</p>
+<pre><code>@Override
+public void select() &#123;
+    System.out.println(&quot;查询selectById&quot;);
+    
+&#125;
+
+@Override
+public void update() &#123;
+    System.out.println(&quot;更新update&quot;);
+    
+&#125;
+</code></pre>
+<p>}</p>
+<p> 2.3 定义了一个名为UserServiceProxy 的静态代理类。</p>
+<p>&#x2F;&#x2F;代理<br>public class UserServiceProxy implements UserService{</p>
+<pre><code>//包含Subject真实的主题
+private UserServiceImpl realUserService = new UserServiceImpl();
+
+@Override
+public void select() &#123;
+    long begin = System.currentTimeMillis();
+    //调用真正的业务逻辑
+    realUserService.select();
+    
+    long end = System.currentTimeMillis();
+    System.out.println(&quot;select()执行耗时&quot;+(end-begin)+&quot;毫秒&quot;);
+    
+&#125;
+
+@Override
+public void update() &#123;
+    realUserService.update();
+    
+&#125;
+
+    这个代理类实现了UserService接口，并包含了一个UserServiceImpl 对象来执行实际的业务逻辑。在代理类中，可以在调用真实业务逻辑之前或之后添加额外的操作。
+</code></pre>
+<p>2.4 静态代理的优缺点：</p>
+<p>优点：</p>
+<p>编译期检查，容易发现问题。<br>代码清晰易读，易于维护。<br>缺点：</p>
+<p>不灵活，修改或扩展目标类需要同时修改代理类。<br>存在大量的重复代码。<br>三、动态代理<br>1 定义<br>        动态代理是在运行时生成代理类的。与静态代理不同，动态代理不需要手动编写代理类，而是使用Java的反射机制动态生成代理类。</p>
+<p>2 实现<br>2.1 先定义一个OrderService 接口。</p>
+<p>public interface OrderService {<br>    public void create(int money,int uid);</p>
+<p>}<br>2.2  OrderService接口的具体实现类：OrderServiceImpl 。</p>
+<p>public class OrderServiceImpl implements OrderService{</p>
+<pre><code>@Override
+public void create(int money, int uid) &#123;
+    System.out.println(&quot;订单被创建&quot;);
+&#125;
+</code></pre>
+<p>}<br> 2.3 定义了一个 PerformanceInvocationHandler 类。</p>
+<p>&#x2F;&#x2F;用于检测方法执行性能的Handler执行器<br>public class PerformanceInvocationHandler implements InvocationHandler{<br>    private Object real;</p>
+<pre><code>public PerformanceInvocationHandler(Object real) &#123;
+    this.real = real;
+&#125;
+/**
+ * 参数proxy: 代理对象
+ * 参数method:当前执行的方法对象
+ * 参数args:参数列表
+ * */
+@Override
+public Object invoke(Object proxy, Method method, Object[] args) throws Throwable &#123;
+    long begin = System.currentTimeMillis();
+    
+    //真实业务对象当前的执行方法(基于反射的方式)
+    Object returnValue = method.invoke(real, args);
+    
+    long end = System.currentTimeMillis();
+    
+    System.out.println(&quot;方法执行耗时&quot;+(end - begin)+&quot;毫秒！&quot;);
+    
+    return returnValue;
+&#125;
+</code></pre>
+<p>}</p>
+<pre><code>     PerformanceInvocationHandler类实现了InvocationHandler接口，用于动态代理模式中监控方法的执行性能。
+
+    invoke方法：该方法的作用是在方法调用前后添加额外的功能，例如计算方法的执行时间。
+
+    在 invoke 方法中，使用反射机制调用真实业务对象的目标方法 method.invoke(real, args)，并记录执行时间。最后，将执行耗时打印出来。
+</code></pre>
+<p>2.4 使用 Java 动态代理来为OrderServiceImpl 类生成代理对象，并在方法调用前后进行性能监控。</p>
+<p>public class Text01 {<br>    public static void main(String[] args) {<br>        &#x2F;&#x2F;真实的主题对象<br>        OrderServiceImpl realOrderService &#x3D; new OrderServiceImpl();</p>
+<pre><code>    //获取类加载器
+    ClassLoader classLoader = realOrderService.getClass().getClassLoader();
+    
+    //接口列表
+    Class[] interfaces = realOrderService.getClass().getInterfaces();
+    
+    //创建InvocationHandler对象(动态代理对象的执行逻辑)
+    PerformanceInvocationHandler h = new PerformanceInvocationHandler(realOrderService);
+    
+    //创建一个代理对象(动态代理对象)
+    OrderService orderServiceProxy = (OrderService) Proxy.newProxyInstance(classLoader, interfaces, h);
+    
+    //调用方法
+    orderServiceProxy.create(1234, 0001);	
+&#125;
+</code></pre>
+<p>}</p>
+<pre><code>    使用Proxy.newProxyInstance方法创建代理对象。这个代理对象会实现OrderService接口，
+</code></pre>
+<p>并在调用方法时使用PerformanceInvocationHandler 中的invoke方法来处理。</p>
+<p>四、静态代理与动态代理<br>对比维度	静态代理	动态代理<br>实现方式	代理类在编译期确定	代理类在运行时动态生成<br>代理类的数量	每个目标类对应一个代理类	一个代理类可以代理多个目标类<br>编写难度	需要手动编写代理类，重复代码多	只需编写一个InvocationHandler实现类<br>性能	性能较高，不涉及反射	性能较低，依赖反射机制<br>灵活性	不灵活，目标类变化时代理类需同步修改	灵活，目标类变化时无需修改代理类<br>五、总结<br>静态代理适用于结构简单、需求明确的场景，如对固定业务逻辑的增强。<br>动态代理适用于复杂、需求变化频繁的场景，特别是在AOP（面向切面编程）中应用广泛。</p>
 
       
 
@@ -1114,11 +1224,30 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">什么是代理模式</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">静态代理</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态代理</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2024/09/1d8cd3fa57af.html">展开全文 >></a>
+          <a class="article-more-a" href="/2024/09/eef2b66eb501.html">展开全文 >></a>
         </p>
       
 
@@ -1865,14 +1994,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">什么是Docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">基本操作</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">概念</a>
               </li>
              
@@ -1890,6 +2011,66 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">File类</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">什么是Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">基本操作</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">基本数据类型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">结构化程序设计</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">什么是代理模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">静态代理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">动态代理</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">测试tage</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">第二个tage</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">用户态和内核态</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">内存泄漏和内存溢出</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">I/O多路复用</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">TCP网络模型</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1918,46 +2099,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">反射的常见场景</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">基本数据类型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">结构化程序设计</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">用户态和内核态</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">内存泄漏和内存溢出</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">I/O多路复用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">测试tage</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">第二个tage</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">TCP网络模型</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">HTTP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">TCP</a>
               </li>
             
             <div class="clearfix"></div>
