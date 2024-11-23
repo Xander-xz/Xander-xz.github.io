@@ -249,12 +249,173 @@
 
 
   
-    <article id="post-学习2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-反射" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/10/9e09b0850651.html">反射</a>
+    </h1>
+  
+
+        
+        <a href="/2024/10/9e09b0850651.html" class="archive-article-date">
+  	<time datetime="2024-10-28T12:08:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-10-28</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>，</p>
+        <p>一、什么是反射？<br>        反射(Reflection)是一种 Java 程序运行期间的动态技术，可以在运行时(runtime)检査、修改其自身结构或行为。通过反射，程序可以访问、检测和修改它自己的类、对象、方法、属性等成员</p>
+<p>二、反射的用途<br>动态加载类:程序可以在运行时动态地加载类库中的类；<br>动态创建对象:反射可以基于类的信息，程序可以在运行时，动态创建对象实例;<br>调用方法:反射可以根据方法名称，程序可以在运行时，动态地调用对象的方法(即使方法在编写程序时还没有定义)<br>访问成员变量:反射可以根据成员变量名称，程序可以在运行时，访问和修改成员变量(反射可以访问私有成员变量)<br>运行时类型信息:反射允许程序在运行时，查询对象的类型信息，这对于编写通用的代码和库非常有用;<br>                Spring 框架使用反射来自动装配组件，实现依赖注入;</p>
+<pre><code>            MyBatis 框架使用反射来创建resultType 对象，封装数据查询结果;
+</code></pre>
+<p>三、获取Class对象<br>        反射的第一步是获取 Class 对象。Class 对象表示某个类的元数据，可以通过以下几种方式获取：</p>
+<p>&#x2F;&#x2F;获取Class类型信息<br>public class Text02 {<br>    public static void main(String[] args) throws ClassNotFoundException {<br>        &#x2F;&#x2F;方式1:通过类名<br>        Class stringClass1 &#x3D; String.class;</p>
+<pre><code>    //方式2：通过Class类的forName()方法
+    Class stringClass2 = Class.forName(&quot;java.lang.String&quot;);
+    
+    //方式3：通过对象调用getClass()方法
+    Class stringClass3 = &quot;&quot;.getClass();
+    
+    System.out.println(stringClass1.hashCode());//1604839423
+    System.out.println(stringClass2.hashCode());//1604839423
+    System.out.println(stringClass3.hashCode());//1604839423
+&#125;
+</code></pre>
+<p>}</p>
+<p>四、Class类型的对象使用场景1<br>        将一个 JSON 字符串解析为 Java 对象，并输出该对象的字段值。</p>
+<p>&#x2F;&#x2F;Class类型的对象使用场景1<br>public class Text03 {<br>    public static void main(String[] args) {<br>        String json&#x3D; “{&quot;name&quot;:&quot;长安荔枝&quot;,&quot;favCount&quot;:234}”;</p>
+<pre><code>    //方法定义
+    Document doc=JSON.parseObject(json,Document.class);
+    System.out.println(doc.getName());
+    System.out.println(doc.getFavCount());
+&#125;
+</code></pre>
+<p>}<br>         使用 JSON.parseObject 方法将 JSON 字符串解析为 Document 类的对象。在解析过程中，JSON 字符串中的数据会自动映射到 Document 类的对应字段中。</p>
+<p>五、Class类型的对象使用场景2<br>        通过 Class 对象在运行时获取一个类的相关信息，包括类名、包名、成员变量（字段）、成员方法等。</p>
+<p>&#x2F;&#x2F;Class类型的对象使用场景2<br>&#x2F;&#x2F;获取丰富的类型内容<br>public class Text04 {<br>    public static void main(String[] args) throws ClassNotFoundException {<br>        Class clz &#x3D; Class.forName(“java.util.HashMap”);</p>
+<pre><code>    //获取类名
+    System.out.println(&quot;完全限定名：&quot;+clz.getName());
+    System.out.println(&quot;简单的类名：&quot;+clz.getSimpleName());
+    
+    //获取包名
+    System.out.println(&quot;package&quot;+clz.getPackage().getName());
+    System.out.println();
+    
+    //获取成员变量
+    Field[] fieldArray =clz.getDeclaredFields();
+    System.out.println(&quot;成员变量(字段)&quot;);
+    for(Field field:fieldArray) &#123;
+        System.out.println(field);
+    &#125;
+    System.out.println();
+    
+    //获取成员方法
+    Method[] methodArray = clz.getDeclaredMethods();
+    System.out.println(&quot;成员方法&quot;);
+    for(Method method:methodArray) &#123;
+        System.out.println(method);
+    &#125;	
+&#125;
+</code></pre>
+<p>}</p>
+<p>clz.getName() 返回类的完全限定名，包括包名，例如 “java.util.HashMap”。<br>clz.getSimpleName() 返回类的简单名称，不包括包名，例如 “HashMap”。<br>clz.getPackage().getName() 返回类所属的包名，例如 “java.util”。<br>clz.getDeclaredFields() 返回一个 Field 数组，包含了类声明的所有字段（包括私有字段）。<br>clz.getDeclaredMethods() 返回一个 Method 数组，包含了类声明的所有方法（包括私有方法）。<br>六、通过反射创建对象<br>方式一：通过 Class 对象直接调用 newInstance() 方法</p>
+<p>方式二：通过获取构造方法（Constructor）来创建对象。</p>
+<p>&#x2F;&#x2F;通过反射的方式，创建对象<br>public class Text05 {<br>    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {<br>        Class clz &#x3D; Class.forName(“com.apesource.demo01.Document”);</p>
+<pre><code>    //方式1：直接通过Class对象，调用newInstance()方法
+    Object objx = clz.newInstance();//相当于在执行无参构造方法
+    
+    //方式2：通过构造器(构造方法)
+    //无参构造方法
+    Constructor constructor1 = clz.getDeclaredConstructor();//获取无参构造方法
+    System.out.println(constructor1);
+    Object obj1 = constructor1.newInstance();//执行构造器(构造方法),创建对象
+    
+    //有参构造方法
+    Constructor constructor2 = clz.getDeclaredConstructor(String.class);//获取有参构造方法
+    System.out.println(constructor2);
+    Object obj2 = constructor2.newInstance(&quot;两京十五日&quot;);
+    
+    Constructor constructor3 = clz.getDeclaredConstructor(int.class);//获取有参构造方法
+    System.out.println(constructor3);
+    Object obj3 = constructor3.newInstance(34);
+    
+    Constructor constructor4 = clz.getDeclaredConstructor(String.class,int.class);//获取有参构造方法
+    System.out.println(constructor4);
+    Object obj4 = constructor4.newInstance(&quot;风起陇西&quot;,64);
+    
+    System.out.println(objx);
+    System.out.println(obj1);
+    System.out.println(obj2);
+    System.out.println(obj3);
+    System.out.println(obj4);
+&#125;
+</code></pre>
+<p>newInstance() 方法是 Class 对象提供的一个方法，它调用类的无参构造方法来创建类的实例。<br>注意：这个方法在 Java 9 以后已经被弃用，推荐使用 Constructor 对象来创建实例。<br>通过 getDeclaredConstructor() 方法获取 Document 类的无参构造方法，然后调用 newInstance() 方法创建实例。<br>注意：如果类中没有无参构造方法，调用 getDeclaredConstructor() 会抛出 NoSuchMethodException。<br>通过 getDeclaredConstructor(String.class) 获取带有一个 String 参数的构造方法，并传入 “两京十五日” 作为参数来创建对象。<br>通过 getDeclaredConstructor(int.class) 获取带有一个 int 参数的构造方法，并传入 34 作为参数来创建对象。<br>七、使用 Java 反射机制获取和调用类的构造方法，访问私有构造方法并创建对象<br>public class Text06 {<br>    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {<br>        Class clz &#x3D; Class.forName(“com.apesource.demo01.Document”);</p>
+<pre><code>    //获取一组构造器
+    Constructor[] constructorArray1 = clz.getConstructors();//public
+    Constructor[] constructorArray2 = clz.getDeclaredConstructors();//public、private
+    
+    //获取指定构造器
+    Constructor constructor1 = clz.getConstructor();
+    Constructor constructor2 = clz.getDeclaredConstructor(String.class);
+    System.out.println(constructor1);
+    System.out.println(constructor2);
+    
+    //调用私有构造器，必须设置它的访问全限
+    constructor2.setAccessible(true);
+    
+    //调用构造器，创建对象
+    Object obj = constructor2.newInstance(&quot;长安三万里&quot;);
+    System.out.println(obj);
+&#125;
+</code></pre>
+<p>}</p>
+<p>getConstructors() 方法返回一个包含所有公共（public）构造方法的数组。如果类中没有 public 构造方法，则返回空数组。<br>getDeclaredConstructors() 方法返回一个包含所有声明的构造方法的数组（包括私有的、受保护的和默认访问级别的构造方法）。<br>getConstructor() 方法用于获取类的无参构造方法（必须是 public 的）。如果没有无参构造方法或者不是 public，则抛出 NoSuchMethodException。<br>getDeclaredConstructor(Class&lt;?&gt;… parameterTypes) 方法用于获取指定参数类型的构造方法。这里通过传入 String.class 参数获取一个带有 String 参数的构造方法。这个构造方法可以是任何访问级别（public、private、protected、默认）。<br>setAccessible(true) 用于绕过 Java 访问控制机制，使私有构造方法也可以被调用。如果不设置 Accessible 为 true，那么调用私有构造方法时会抛出 IllegalAccessException。<br>newInstance(Object… initargs) 方法使用指定的构造方法创建对象。这里调用了带有 String 参数的构造方法，并传入 “长安三万里” 作为参数。<br>八、通过反射，访问并使用成员方法<br>public class Text08 {<br>    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException, SecurityException, IllegalArgumentException, InvocationTargetException {<br>        &#x2F;&#x2F;硬编码的方式<br>&#x2F;&#x2F;		Document doc1 &#x3D; new Document();<br>&#x2F;&#x2F;		doc1.setName(“海底两万里”);<br>&#x2F;&#x2F;		doc1.setFavCount(10025);</p>
+<pre><code>    //反射的方式
+    Class clz = Class.forName(&quot;com.apesource.demo01.Document&quot;);//获取类型信息
+    Object doc1 = clz.newInstance();//创建对象
+    
+    //获取指定名称和参数类型的方法
+    Method setNameMethod = clz.getMethod(&quot;setName&quot;, String.class);
+    Method setFavCountMethod = clz.getMethod(&quot;setFavCount&quot;, int.class);
+    
+    //执行方法
+    //doc1.setName(&quot;海底两万里&quot;);
+    setNameMethod.invoke(doc1, &quot;海底两万里&quot;);
+    //doc1.setFavCount(10025);
+    setFavCountMethod.invoke(doc1, 10025);
+    
+    System.out.println(doc1);
+    
+&#125;
+</code></pre>
+<p>}</p>
+<p>getMethod(String name, Class&lt;?&gt;… parameterTypes) 方法用于获取类的某个 public 方法。方法名称和参数类型必须匹配才能成功获取方法。<br>invoke(Object obj, Object… args) 方法用于调用指定的实例方法。<br>setNameMethod.invoke(doc1, “海底两万里”); 等同于 doc1.setName(“海底两万里”);。<br>setFavCountMethod.invoke(doc1, 10025); 等同于 doc1.setFavCount(10025);。<br>九、通过反射，调用静态方法以及处理可变参数<br>public class Text09_01 {<br>    public static void main(String[] args) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException, ClassNotFoundException {<br>        &#x2F;&#x2F;硬编码的方式<br>        &#x2F;&#x2F;调用静态方法<br>&#x2F;&#x2F;		Document.dosth();</p>
+<pre><code>    String ret1 = String.format(&quot;HashMap的默认初始容量是%d,加载因子是%.2f&quot;, 16,0.75f);
+    System.out.println(ret1);
+    
+    
+    //反射的方式
+</code></pre>
+<p>&#x2F;&#x2F;		Class clz &#x3D; Class.forName(“com.apesource.demo01.Document”);<br>&#x2F;&#x2F;		Method dosthMethod &#x3D; clz.getMethod(“dosth”);<br>&#x2F;&#x2F;		dosthMethod.invoke(null);</p>
+<pre><code>    Class clz = String.class;
+    Method formatMethod = clz.getMethod(&quot;format&quot;, String.class,Object[].class);
+    String ret2 = formatMethod.invoke(null, &quot;HashMap的默认初始容量是%d,加载因子是%.2f&quot;,new Object[] &#123;16,0.75f&#125;).toString();
+    
+    System.out.println(ret2);
+&#125;
+</code></pre>
+<p>}</p>
+<p>这是直接调用静态方法的传统方式。假设 Document 类有一个名为 dosth() 的静态方法，可以直接使用类名调用。<br>String.format 是一个静态方法，用于格式化字符串，类似于 printf 的格式化规则<br>获取 String 类的 Class 对象：使用 Class clz &#x3D; String.class;。<br>获取 String 类的 Class 对象：使用 Class clz &#x3D; String.class;。<br>调用静态方法：使用 invoke(null, “HashMap的默认初始容量是%d,加载因子是%.2f”, new Object[] {16, 0.75f}) 调用静态方法，因为 format 是静态方法，所以第一个参数是 null。<br>注意invoke 方法中，Object[] 参数必须以数组形式传递，所以用了 new Object[] {16, 0.75f}。<br>十、反射的性能问题<br>        反射虽然功能强大，但由于是在运行时动态操作类，因此性能相对较低。此外，反射也会破</p>
+<p>坏封装性，使用时要谨慎。</p>
+<p>十一、反射的安全性<br>        使用反射时需要注意安全问题，因为它可以绕过 Java 的访问控制机制。例如，可以访问私有</p>
+<p>字段或方法，因此在开发中使用反射要特别小心。</p>
+<p>十二、反射的常见场景<br>框架开发：如 Spring 中的依赖注入、Hibernate 中的 ORM 等。<br>调试工具：如 Java 的调试器、分析工具等。<br>动态代理：在 Java 中，动态代理依赖于反射。</p>
 
       
 
@@ -263,11 +424,46 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">什么是反射？</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">反射的用途</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">获取Class对象</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">通过反射创建对象</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反射的性能问题</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">反射的安全性</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反射的常见场景</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2024/11/0c23676a830c.html">展开全文 >></a>
+          <a class="article-more-a" href="/2024/10/9e09b0850651.html">展开全文 >></a>
         </p>
       
 
@@ -1027,7 +1223,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="小白实现双向链表需要注意的事项"><a href="#小白实现双向链表需要注意的事项" class="headerlink" title="小白实现双向链表需要注意的事项"></a>小白实现双向链表需要注意的事项</h1><p>直接上代码：<br>#include &lt;stdio.h&gt;</p>
+        <p>小白实现双向链表需要注意的事项<br>直接上代码：<br>#include &lt;stdio.h&gt;</p>
 <p>#include &lt;stdlib.h&gt;</p>
 <p>  &#x2F;&#x2F; 定义双向链表节点结构</p>
 <p>struct Node {</p>
@@ -1294,6 +1490,34 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">基本操作</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">什么是反射？</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">反射的用途</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">获取Class对象</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">通过反射创建对象</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">反射的性能问题</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">反射的安全性</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">反射的常见场景</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -6,36 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>计算机网络 | Hexo</title>
+  <title>Tag: 通过反射创建对象 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、基础(一) TCP&#x2F;IP 网络模型有哪几层？ 主要包括4层： 1. 应用层：作用：处理程序与程序之间的网络通信 包括一些协议：HTTP、FTP（文件传输）、DNS等等 2. 传输层：作用：在不同设备中建立一个怎样的连接来传输数据 主要用两种协议：TCP和UDP TCP： 就是有连接的，可靠的，面向字节流的传输协议，能够保证数据的不丢失、有序、不重复 通过三次握手和四次挥手来建立连接和">
-<meta property="og:type" content="article">
-<meta property="og:title" content="计算机网络">
-<meta property="og:url" content="http://example.com/2024/10/211304e1732c.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/tags/%E9%80%9A%E8%BF%87%E5%8F%8D%E5%B0%84%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一、基础(一) TCP&#x2F;IP 网络模型有哪几层？ 主要包括4层： 1. 应用层：作用：处理程序与程序之间的网络通信 包括一些协议：HTTP、FTP（文件传输）、DNS等等 2. 传输层：作用：在不同设备中建立一个怎样的连接来传输数据 主要用两种协议：TCP和UDP TCP： 就是有连接的，可靠的，面向字节流的传输协议，能够保证数据的不丢失、有序、不重复 通过三次握手和四次挥手来建立连接和">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35265020/1716900458096-95e7f98f-225a-419f-85f8-9a553d528e84.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35265020/1716904577523-6322b4ff-173c-4441-bea9-da6693d2d502.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35265020/1708745741210-2d896b1f-a089-414a-80df-672f142cee25.png?x-oss-process=image/format,webp/resize,w_1125,limit_0">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35265020/1716951138096-4a5dcbc8-4fc4-49a9-9862-f3385a9e8162.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35265020/1708745945536-4a0efc4e-dd70-4968-855b-62f16539da3f.png?x-oss-process=image/format,webp">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35265020/1716952654818-d464d9bb-7c52-4269-9656-4352bcce19f3.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35265020/1716967137589-a193fbd5-ff04-4d3e-8732-6cb63f98b302.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35265020/1716972013838-95f2fec7-1205-4bcf-8ea1-4347d6eeb6e3.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35265020/1716974670765-2e09b1e2-befa-4c13-a91f-935e548a1037.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35265020/1716985881674-dce9b564-dfff-47c7-b9af-5ffe45cc70b6.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35265020/1717034387970-286dc6c1-3ac2-4ffe-845c-44fa6b4aa391.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35265020/1717034737839-e40b6224-0362-4300-b2c5-a1a68004b2af.png">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/35265020/1717319259057-4b951907-2394-4ab4-8b0d-f77586df1e06.png">
-<meta property="article:published_time" content="2024-10-23T10:44:23.000Z">
-<meta property="article:modified_time" content="2024-11-23T10:48:34.288Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="TCP网络模型">
-<meta property="article:tag" content="HTTP">
-<meta property="article:tag" content="TCP">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2024/png/35265020/1716900458096-95e7f98f-225a-419f-85f8-9a553d528e84.png">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -171,456 +150,84 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-计算机网络" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      计算机网络
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2024" class="archive-year">2024</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2024/10/9e09b0850651.html" class="archive-article-date">
+  	<time datetime="2024-10-28T12:08:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-10-28</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2024/10/9e09b0850651.html">反射</a>
     </h1>
   
 
-        
-        <a href="/2024/10/211304e1732c.html" class="archive-article-date">
-  	<time datetime="2024-10-23T10:44:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-10-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一、基础"><a href="#一、基础" class="headerlink" title="一、基础"></a>一、基础</h1><h2 id="一-TCP-IP-网络模型有哪几层？"><a href="#一-TCP-IP-网络模型有哪几层？" class="headerlink" title="(一) TCP&#x2F;IP 网络模型有哪几层？"></a>(一) TCP&#x2F;IP 网络模型有哪几层？</h2><p><img src="https://cdn.nlark.com/yuque/0/2024/png/35265020/1716900458096-95e7f98f-225a-419f-85f8-9a553d528e84.png"></p>
-<p>主要包括4层：</p>
-<h3 id="1-应用层："><a href="#1-应用层：" class="headerlink" title="1. 应用层："></a>1. 应用层：</h3><p>作用：处理程序与程序之间的网络通信</p>
-<p>包括一些协议：HTTP、FTP（文件传输）、DNS等等</p>
-<h3 id="2-传输层："><a href="#2-传输层：" class="headerlink" title="2. 传输层："></a>2. 传输层：</h3><p>作用：在不同设备中建立一个怎样的连接来传输数据</p>
-<p>主要用两种协议：TCP和UDP</p>
-<p>TCP：</p>
-<p>就是有连接的，可靠的，面向字节流的传输协议，能够保证数据的不丢失、有序、不重复</p>
-<p>通过三次握手和四次挥手来建立连接和断开连接</p>
-<p>TCP 协议会将数据包分块，每个分块称为一个 <strong>TCP 段</strong>（_TCP Segment_）。这样即使中途有一个TCP段丢失或损坏了，只需要重新发送这一个分块，而不用重新发送整个数据包。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/35265020/1716904577523-6322b4ff-173c-4441-bea9-da6693d2d502.png"></p>
-<p>UDP：</p>
-<p>无连接的不可靠的传输、面向数据包的传输</p>
-<p>只负责发送，不保证数据能够到达</p>
-<h3 id="3-网络层"><a href="#3-网络层" class="headerlink" title="3. 网络层"></a>3. 网络层</h3><p>负责数据包在网络中的传输和路由选择</p>
-<p>主要协议：IP协议（包括IPv4-32位和IPv6-64位）</p>
-<p>ARP协议：IP和MAC的映射（百度百科和维基百科）</p>
-<h3 id="4-网络接口层"><a href="#4-网络接口层" class="headerlink" title="4. 网络接口层"></a>4. 网络接口层</h3><p>在物理设备之间进行传输</p>
-<p>有ppp协议</p>
-<h1 id="二、HTTP"><a href="#二、HTTP" class="headerlink" title="二、HTTP"></a>二、HTTP</h1><h2 id="一-概念"><a href="#一-概念" class="headerlink" title="(一) 概念"></a>(一) 概念</h2><h3 id="1-定义："><a href="#1-定义：" class="headerlink" title="1. 定义："></a>1. 定义：</h3><p>超文本传输协议，是在应用层的、用于在服务器、客户端之间传输超文本【文字、音视频】的一个协议</p>
-<p>是无状态的协议（会话跟踪技术来保持状态）</p>
-<h3 id="2-通信方式："><a href="#2-通信方式：" class="headerlink" title="2. 通信方式："></a>2. 通信方式：</h3><p>使用的是请求响应模型</p>
-<p>通信流程大概是：</p>
-<ol>
-<li>建立TCP连接</li>
-<li>去请求，发送请求体；服务器处理后做出响应</li>
-<li>释放TCP连接</li>
-<li>如果持久化连接，就不会立即断开，除非一方主动断开或者一定时间内没有发送消息就会断开</li>
-</ol>
-<h3 id="3-请求："><a href="#3-请求：" class="headerlink" title="3. 请求："></a>3. 请求：</h3><p>请求内容主要包括：</p>
-<ul>
-<li><p>请求行</p>
-</li>
-<li><p>请求方法、路径、HTTP版本</p>
-</li>
-<li><p>请求头</p>
-</li>
-<li><p>kv键值对型</p>
-</li>
-<li><p>有默认的：HOST：域名；Content-Length；Content-Type等等</p>
-</li>
-<li><p>可以自己设置</p>
-</li>
-<li><p>请求体（Post就有）</p>
-</li>
-</ul>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/35265020/1708745741210-2d896b1f-a089-414a-80df-672f142cee25.png?x-oss-process=image/format,webp/resize,w_1125,limit_0"></p>
-<p>请求方法：</p>
-<p>都是用来请求服务器做一些事的，用这个方法来标识服务器做的事不同：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/35265020/1716951138096-4a5dcbc8-4fc4-49a9-9862-f3385a9e8162.png"></p>
-<h3 id="4-响应："><a href="#4-响应：" class="headerlink" title="4. 响应："></a>4. 响应：</h3><p>响应的内容（协议格式）包括：</p>
-<p>格式：响应行、响应头 、响应体</p>
-<ol>
-<li>响应行</li>
-</ol>
-<p>包括：HTTP版本；状态码；状态码的描述</p>
-<ol start="2">
-<li>响应头</li>
-</ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/35265020/1708745945536-4a0efc4e-dd70-4968-855b-62f16539da3f.png?x-oss-process=image/format,webp"></p>
-<p>状态码：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/35265020/1716952654818-d464d9bb-7c52-4269-9656-4352bcce19f3.png"></p>
-<h2 id="二-Get和Post的区别"><a href="#二-Get和Post的区别" class="headerlink" title="(二) Get和Post的区别"></a>(二) Get和Post的区别</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42931285/article/details/119852294">get请求和post请求的区别（全面讲解）_get和post请求的区别-CSDN博客</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/logsharing/p/8448446.html">GET和POST两种基本请求方法的区别 - 在途中# - 博客园</a></p>
-<p>它们两个都是HTTP的请求方式，底层都是TCP&#x2F;IP协议</p>
-<ol>
-<li>参数</li>
-</ol>
-<p>GET的参数是放在URL中，POST是放在请求体中</p>
-<p>GetURL参数是有限制的；Post没有</p>
-<ol start="2">
-<li>从 RFC 规范看：安全</li>
-</ol>
-<ul>
-<li>「安全」是指请求方法不会「破坏」服务器上的资源</li>
-<li>「幂等」，意思是多次执行相同的操作，结果都是「相同」的</li>
-</ul>
-<p>Get安全且幂等的，可以对 GET 请求的数据做缓存，而且在浏览器中 GET 请求可以保存为书签。</p>
-<p>Post是不安全的，一般不会缓存 POST 请求，也不能把 POST 请求保存为书签。</p>
-<ol start="3">
-<li>get请求刷新服务器或者回退没有影响，post请求回退时会重新提交数据请求。</li>
-<li>产生的数据包</li>
-</ol>
-<p>Get产生一个数据包，对于GET方式的请求，浏览器会把http header和data一并发送出去</p>
-<p>Post产生两个数据包，览器先发送header，服务器响应100 continue，浏览器再发送data</p>
-<h2 id="三-缓存"><a href="#三-缓存" class="headerlink" title="(三) 缓存"></a>(三) 缓存</h2><p>重复的HTTP请求可以缓存到本地，之后就直接读缓存</p>
-<p>有两种：强制缓存和协商缓存</p>
-<p>强制缓存：</p>
-<p>只要浏览器判断缓存没有过期，则直接使用浏览器的本地缓存</p>
-<p>会有一个响应头设置过期时间，每次都判断一下这个时间有没有过期</p>
-<p>协商缓存；</p>
-<p>与服务端协商，通过协商结果来判断是否使用本地缓存。也是通过请求体和响应头来判断</p>
-<p>服务器响应304就走缓存</p>
-<h2 id="四-HTTP和HTTPS的区别"><a href="#四-HTTP和HTTPS的区别" class="headerlink" title="(四) HTTP和HTTPS的区别"></a>(四) HTTP和HTTPS的区别</h2><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000021494676">滑动验证页面</a></p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000021559557">滑动验证页面</a></p>
-<ol>
-<li>安全:</li>
-</ol>
-<p>HTTP是超文本传输协议，问题：不安全，信息都是明文传输的【篡改和获取】</p>
-<p>HTTPS是HTTP的扩展，安全，有证书和加密的过程。加入了SSL&#x2F;TLS 安全协议,还要CA证书，对报文进行了加密</p>
-<ol start="2">
-<li>握手</li>
-</ol>
-<p>HTTP三次握手就行，HTTPS还要进行SSL&#x2F;TLS 的握手过程，才可进入加密报文传输</p>
-<ol start="3">
-<li>默认端口不一样</li>
-</ol>
-<p>HTTP是80， HTTPS是443</p>
-<p>主要还是安全，就是</p>
-<p>HTTPS加密（握手）流程</p>
-<p>包括最开始的握手和挥手</p>
-<p>主要包括证书验证和数据传输【加密和非加密】</p>
-<ul>
-<li>首先服务端会向CA申请数字证书，里面会保护公司等等信息还有公钥和私钥</li>
-<li>客户端发起请求</li>
-<li>服务端会把证书和公钥响应给客户端</li>
-<li>客户端会检验证书</li>
-<li>成功就</li>
-</ul>
-<p>先非对称加密：客户端会生成随机码Key，并用公钥加密生成会话秘钥&#x3D;》发给服务器&#x3D;》服务器用私钥解密，这样两边都得到了会话秘钥</p>
-<p>对称加密：之后就去使用会话秘钥加密和解密，进行通信</p>
-<p>总的来说就是双方</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/35265020/1716967137589-a193fbd5-ff04-4d3e-8732-6cb63f98b302.png"></p>
-<p>对称加密：密钥泄漏就会导致信息泄漏。每次使用其他人不知道的惟一密钥管理起来成本也高</p>
-<p>非对称加密：私钥不在网络上传输，更安全，加密解密耗时</p>
-<p>一定安全吗：</p>
-<p>中间人自己伪造证书就可能不安全</p>
-<h1 id="三、TCP"><a href="#三、TCP" class="headerlink" title="三、TCP"></a>三、TCP</h1><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000022144695">滑动验证页面</a></p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000022144695">滑动验证页面</a></p>
-<h2 id="一-概念-1"><a href="#一-概念-1" class="headerlink" title="(一) 概念"></a>(一) 概念</h2><p>TCP 是<strong>面向连接的、可靠的、基于字节流</strong>的传输层通信协议</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/35265020/1716972013838-95f2fec7-1205-4bcf-8ea1-4347d6eeb6e3.png"></p>
-<h2 id="二-TCP和UPD的区别"><a href="#二-TCP和UPD的区别" class="headerlink" title="(二) TCP和UPD的区别"></a>(二) TCP和UPD的区别</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43796685/article/details/104558965">TCP与UDP的区别（超详细）_tcp和udp的区别-CSDN博客</a></p>
-<p>TCP是面向连接的、面向字节流的，可靠的传输层协议。保证数据的有序、不重复、不丢失、不出错</p>
-<p>UPD是面向报文的，无连接的协议</p>
-<p>区别主要在于：</p>
-<h3 id="1-连接："><a href="#1-连接：" class="headerlink" title="1. 连接："></a>1. 连接：</h3><p>TCP传输之前要建立连接【三次握手、四次挥手】，并且是点对点的通信</p>
-<p>UPD不用，直接发送；并且可以一对一、一对多、多对多</p>
-<h3 id="2-可靠"><a href="#2-可靠" class="headerlink" title="2. 可靠"></a>2. 可靠</h3><p>TCP除了连接保证可靠，还通过以下方式保证可靠</p>
-<p>序列号和确认：利用序列号保证 有序；确认应答机制和确认序列号告诉发送方接收到数据以及下次该从那里发数据–数据有序</p>
-<p>校验数据：利用校验和校验数据，防止错误数据–数据没有错</p>
-<p>超时重传：当 TCP 发出一个报文段后，它会启动一个定时器，等待目的端确认收到这个报文段。如果不能及时收到一个确认，将重发这个报文段</p>
-<p>流量控制：发送的速率与接收的速率匹配，防止接收方处理不过来，会让发送方调整它的发送窗口</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41431406/article/details/97926927">TCP的拥塞控制（详解）-CSDN博客</a></p>
-<p>拥塞控制：根据网络拥塞的状态来调整发送窗口的大小【慢开始、拥塞避免等等】</p>
-<h3 id="3-开销"><a href="#3-开销" class="headerlink" title="3. 开销"></a>3. 开销</h3><p>TCP首部开销 大，UPD少，只有8个字节</p>
-<h3 id="4-字节流"><a href="#4-字节流" class="headerlink" title="4. 字节流"></a>4. 字节流</h3><p>TCP面向字节流，一个数据包可以以字节大小来拆分成多个数据包</p>
-<p>UPD面向报文</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/35265020/1716974670765-2e09b1e2-befa-4c13-a91f-935e548a1037.png"></p>
-<h2 id="三-TCP是如何保证可靠传输的？"><a href="#三-TCP是如何保证可靠传输的？" class="headerlink" title="(三) TCP是如何保证可靠传输的？"></a>(三) TCP是如何保证可靠传输的？</h2><p>连接：</p>
-<p>序列号和确认：</p>
-<p>利用序列号保证 有序；确认应答机制和确认序列号告诉发送方接收到数据以及下次该从那里发数据–数据有序</p>
-<p>校验数据：</p>
-<p>利用校验和校验数据，防止错误数据–数据没有错</p>
-<p>超时重传：</p>
-<p>当 TCP 发出一个报文段后，它会启动一个定时器，等待目的端确认收到这个报文段。如果不能及时收到一个确认，将重发这个报文段</p>
-<p>流量控制：发送的速率与接收的速率匹配，防止接收方处理不过来，会让发送方调整它的发送窗口</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41431406/article/details/97926927">TCP的拥塞控制（详解）-CSDN博客</a></p>
-<p>拥塞控制：根据网络拥塞的状态来调整发送窗口的大小【慢开始、拥塞避免等等】</p>
-<h2 id="四-TCP建立连接的过程（三次握手）"><a href="#四-TCP建立连接的过程（三次握手）" class="headerlink" title="(四) TCP建立连接的过程（三次握手）"></a>(四) TCP建立连接的过程（三次握手）</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/663880512?utm_id=0">https://zhuanlan.zhihu.com/p/663880512?utm_id&#x3D;0</a></p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000022144695">滑动验证页面</a></p>
-<p>是通过三次握手, 交换三个TCP报文段来进行的</p>
-<ol>
-<li>在最开始，客户端和服务端都处于 CLOSE 状态</li>
-</ol>
-<p>之后服务器就会进入监听（LISTEN）状态，等待客户的TCP连接建立的请求。</p>
-<ol start="2">
-<li>第一次握手</li>
-</ol>
-<p>发送连接请求的报文</p>
-<ol>
-<li><p>客户端会随机初始化序号，SYN 标志位置为 1（表示连接请求或者请求连接确认的报文，只在第一次和第二次握手中出现），然后把这个报文，SYN 报文发送给服务端，表示向服务端发起连接。不能携带数据</p>
-</li>
-<li><p>之后客户端处于 SYN-SENT （同步已发送状态）状态</p>
-</li>
-<li><p>第二次握手</p>
-</li>
-</ol>
-<p>服务端收到客户端的 SYN 报文，同意连接后就会发送请求连接确认的报文</p>
-<ol>
-<li><p>初始化序号和设置确认序号（就是上一次序号+1，告诉下次发的报文应该从哪里发，也是对上一次序号报文的确认）</p>
-</li>
-<li><p>同步位SYN和确认位ACK都被置为1，然后把报文发给客户端，不能携带数据</p>
-</li>
-<li><p>之后服务端处于 SYN-RCVD （同步已接收）状态</p>
-</li>
-<li><p>第三次握手</p>
-</li>
-</ol>
-<p>客户端在收到请求连接确认报文后，还需要向TCP服务器发送一个普通的TCP确认报文段，并进入连接已建立状态</p>
-<ol>
-<li>序号设置为上个报文的确认序号，确认序号为上个报文序号+1</li>
-<li>ACK设置为1</li>
-<li>然后把这个报文发给服务端</li>
-<li>可以携带数据</li>
-</ol>
-<p>完成三次握手，双方都处于 ESTABLISHED 状态，此时连接就已建立完成，客户端和服务端就可以相互发送数据了</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/35265020/1716985881674-dce9b564-dfff-47c7-b9af-5ffe45cc70b6.png"></p>
-<h2 id="五-TCP断开连接的过程"><a href="#五-TCP断开连接的过程" class="headerlink" title="(五) TCP断开连接的过程"></a>(五) TCP断开连接的过程</h2><p>四次挥手，双方都可以主动断开连接，都是各自发送一个 FIN 和一个 ACK，每个方向单独关闭。</p>
-<ul>
-<li>第一次挥手：</li>
-</ul>
-<p>客户端打算关闭连接，此时会发送一个</p>
-<p>FIN 标志位被置为 1 的FIN报文</p>
-<p>序号就是最后发送字节序号+1</p>
-<p>之后客户端进入 FIN_WAIT_1 状态。</p>
-<ul>
-<li>第二次挥手</li>
-</ul>
-<p>服务端收到FIN报文后，发送确认报文：</p>
-<p>ACK &#x3D; 1，</p>
-<p>序号：自己的序号；确认序号：上次报文+1；</p>
-<p>服务端进入CLOSE_WAIT 状态</p>
-<p>此时 TCP 处于半关闭状态，也就是说客户端不会再发送数据了，但是服务器还可以发送数据，客户端也还能够接收。</p>
-<p>客户端收到服务器的 ACK 报文段后随即进入 FIN-WAIT-2 状态，此时还能收到来自服务器的数据，直到收到 FIN 报文段。</p>
-<ul>
-<li>第三次挥手</li>
-</ul>
-<p>服务器发送完所有数据后，会向客户端发送 FIN 报文段，ACK为1</p>
-<p>之后服务端进入 LAST_ACK 状态。</p>
-<ul>
-<li>第四次挥手</li>
-</ul>
-<p>客户端收到来自服务器的 FIN 报文段后，向服务器发送 ACK 报文，随后进入 TIME-WAIT 状态，等待 2MSL，这是任何报文段在被丢弃前能在网络中存在的最长时间，常用值有30秒、1分钟和2分钟。如无特殊情况，客户端会进入 CLOSED 状态。</p>
-<p>服务器在接收到客户端的 ACK 报文后会随即进入 CLOSED 状态</p>
-<p><a target="_blank" rel="noopener" href="https://xiaolincoding.com/network/3_tcp/tcp_interview.html#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-time-wait-%E7%8A%B6%E6%80%81">https://xiaolincoding.com/network/3_tcp&#x2F;tcp_interview.html#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-time-wait-%E7%8A%B6%E6%80%81</a></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/35265020/1717034387970-286dc6c1-3ac2-4ffe-845c-44fa6b4aa391.png"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/35265020/1717034737839-e40b6224-0362-4300-b2c5-a1a68004b2af.png"></p>
-<h2 id="六-为什么是三次，不是两次或者四次"><a href="#六-为什么是三次，不是两次或者四次" class="headerlink" title="(六) 为什么是三次，不是两次或者四次"></a>(六) 为什么是三次，不是两次或者四次</h2><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000022144695">滑动验证页面</a></p>
-<ol>
-<li>三次握手才可以同步双方的初始序列号</li>
-</ol>
-<p>序列号标识了报文，能够：去重、有序、以及确认报文</p>
-<p>如果是两次握手，只有发起方的初始序号可以得到确认，而接收方的序号得不到确认。</p>
-<ol start="2">
-<li>防止旧的连接请求报文突然又传送到服务器，造成资源</li>
-</ol>
-<p>因为有可能会出现这样的场景：</p>
-<ol>
-<li>客户端进行第一次握手（先发送了一个连接请求的报文）&#x3D;》报文在网络中阻塞了</li>
-<li>然后客户端重新发送连接请求的报文，并二次握手建立了连接</li>
-<li>如果最终连接关闭后，原来阻塞的报文到达了服务端，服务端就会发送报文并等待客户端的数据，造成服务端的资源浪费</li>
-</ol>
-<p>这个就是由于没有第三次握手，服务端不清楚客户端是否收到了自己回复的 ACK 报文，所以服务端每收到一个 SYN 就只能先主动建立一个连接</p>
-<ol start="3">
-<li>避免历史连接</li>
-</ol>
-<p><strong>防止「历史连接」初始化了连接</strong></p>
-<p>考虑一个场景，客户端先发送了 SYN（seq &#x3D; 90）报文，然后客户端宕机了，而且这个 SYN 报文还被网络阻塞了，服务端并没有收到</p>
-<p>接着客户端重启后，又重新向服务端建立连接，发送了 SYN（seq &#x3D; 100）报文</p>
-<p>但是旧的报文先到服务端，服务端会发送连接请求确认报文，客户端收到后会比较判断是不是自己要的（根据自己新发送报文序号和接收的确认序号）</p>
-<p>不是就会发送RST报文，防止建立历史连接（也就是根据旧报文建立连接，通过第三次确认来防止）</p>
-<ol start="4">
-<li>三次握手才能让双方均确认自己和对方的发送和接收能力都正常</li>
-</ol>
-<p>第一次握手：客户端只是发送处请求报文段，什么都无法确认，而服务器可以确认自己的接收能力和对方的发送能力正常；</p>
-<p>第二次握手：客户端可以确认自己发送能力和接收能力正常，对方发送能力和接收能力正常；</p>
-<p>第三次握手：服务器可以确认自己发送能力和接收能力正常，对方发送能力和接收能力正常；</p>
-<p>「四次握手」：三次握手就已经可以建立可靠连接，所以不需要使用更多的通信次数。</p>
-<h2 id="七-挥手为什么要四次而不是三次"><a href="#七-挥手为什么要四次而不是三次" class="headerlink" title="(七) 挥手为什么要四次而不是三次"></a>(七) 挥手为什么要四次而不是三次</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/663880512?utm_id=0">计算机网络「TCP连接的建立和释放」精讲，清晰掌握重难点！</a></p>
-<p>每一次的FIN和ACK都表示一方要关闭</p>
-<p>服务器在收到客户端的 FIN 报文段后，可能还有一些数据要传输，所以不能马上关闭连接，但是会做出应答，返回 ACK 报文段，接下来可能会继续发送数据，在数据发送完后，服务器会向客户单发送 FIN 报文，表示数据已经发送完毕，请求关闭连接，然后客户端再做出应答，因此一共需要四次挥手</p>
-<p>注意：</p>
-<p>当被动关闭方在 TCP 挥手过程中，如果「没有数据要发送」，同时「没有开启 TCP_QUICKACK（默认情况就是没有开启，没有开启 TCP_QUICKACK，等于就是在使用 TCP 延迟确认机制）」，那么第二和第三次挥手就会合并传输，这样就出现了三次挥手。</p>
-<p>延迟确认：</p>
-<p>当发送没有携带数据的 ACK，性价比比较低，因为它也有 40 个字节的 IP 头 和 TCP 头，但却没有携带数据报文</p>
-<p>TCP 延迟确认的策略：</p>
-<ul>
-<li>当有响应数据要发送时，ACK 会随着响应数据一起立刻发送给对方</li>
-<li>当没有响应数据要发送时，ACK 将会延迟一段时间，以等待是否有响应数据可以一起发送</li>
-<li>如果在延迟等待发送 ACK 期间，对方的第二个数据报文又到达了，这时就会立刻发送 ACK</li>
-</ul>
-<h1 id="四、其他："><a href="#四、其他：" class="headerlink" title="四、其他："></a>四、其他：</h1><p>ISO</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2024/png/35265020/1717319259057-4b951907-2394-4ab4-8b0d-f77586df1e06.png"></p>
-
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">TCP网络模型</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">什么是反射？</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">HTTP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">反射的用途</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">TCP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">获取Class对象</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">通过反射创建对象</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反射的性能问题</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">反射的安全性</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">反射的常见场景</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2024/10/211304e1732c.html" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2024/10/532b6cfb3c69.html" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Docker
-        
-      </div>
-    </a>
   
   
-    <a href="/2024/10/b019cdd33fe3.html" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">操作系统</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -643,9 +250,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
