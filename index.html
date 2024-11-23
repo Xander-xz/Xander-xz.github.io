@@ -152,70 +152,6 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-未命名" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/11/7377cf0061e2.html">未命名</a>
-    </h1>
-  
-
-        
-        <a href="/2024/11/7377cf0061e2.html" class="archive-article-date">
-  	<time datetime="2024-11-21T05:45:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-11-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>，，，，<br>，，，，</p>
-<p><img src="https://raw.githubusercontent.com/Xander-xz/test/main/img/202411212227536.jpg" alt="aa.jpg"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/11/7377cf0061e2.html">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-未命名-2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -428,6 +364,144 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2024/11/f3f907403ede.html">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-操作系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/10/b019cdd33fe3.html">未命名</a>
+    </h1>
+  
+
+        
+        <a href="/2024/10/b019cdd33fe3.html" class="archive-article-date">
+  	<time datetime="2024-10-21T05:45:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-10-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="用户态和内核态"><a href="#用户态和内核态" class="headerlink" title="用户态和内核态"></a>用户态和内核态</h1><p>就是两种拥有不同权限的执行模式</p>
+<p>操作系统对CPU的指令是进行了分级的，比如访问磁盘等硬件的指令等级比较高，只能通过系统调用来完成，保证系统的安全性</p>
+<p>这样执行起来有了两种不同的状态</p>
+<p>一个是：</p>
+<p>用户态：只能使用有限的指令集；要去进行一些特权操作比如只用硬件，就要通过【系统调用】进入内核态来完成</p>
+<p>一个就是内核态</p>
+<p>内核态：可以访问系统任何资源，可以直接控制硬件资源、进程调度等等</p>
+<p>如果程序使用系统调用的时候就会出现用户态和内核态的切换</p>
+<p>会触发中断，执行中断的指令&#x3D;》更新一下寄存器，读取一些数据，在内核态中执行逻辑&#x3D;》之后在返回到用户态继续执行。</p>
+<p>synchronized也是在1.6之后进行了优化，有了锁升级</p>
+<h1 id="内存泄漏和内存溢出"><a href="#内存泄漏和内存溢出" class="headerlink" title="内存泄漏和内存溢出"></a>内存泄漏和内存溢出</h1><p>内存溢出 out of memory：是指程序在申请内存时，没有足够的内存空间分配给它</p>
+<p>内存泄露 memory leak：在申请内存后，无法释放已申请的内存空间，就是一次内存泄漏，一直这样会导致OOM</p>
+<h1 id="I-O多路复用"><a href="#I-O多路复用" class="headerlink" title="I&#x2F;O多路复用"></a>I&#x2F;O多路复用</h1><p>IO多路复用就是 复用多个线程来监控网络请求，由它们完成数据准备的操作，完成之后再分配对应的线程去read数据，这样就用少量的线程维护了大量的网络请求。就是一个线程，可以同时处理多个IO请求，然后一个IO一个线程。目的就是提高服务器的吞吐能力。<br>[[<a target="_blank" rel="noopener" href="https://www.cnblogs.com/12345huangchun/p/10066840.html">IO多路复用 - W的一天 - 博客园</a>]]<br>它主要机制有：select、poll、epoll</p>
+<ol>
+<li>select：</li>
+</ol>
+<ul>
+<li><p>首先还是一个线程不断处理客户端连接</p>
+</li>
+<li><p>通过调用系统的select函数，把fd文件描述符传到内核态去进行监听、遍历这个fd的集合。当有文件描述符就绪时，select函数会返回，并告知哪些文件描述符已经准备好进行IO了</p>
+</li>
+<li><p>再去read（也会阻塞）</p>
+</li>
+<li><p>缺点：</p>
+</li>
+<li><p>select 调用需要传入 fd 数组，需要拷贝一份到内核</p>
+</li>
+<li><p>select 在内核层仍然是通过遍历的方式检查文件描述符的就绪状态，是个同步过程，只不过无系统调用切换上下文的开销。（内核层可优化为异步事件通知）</p>
+</li>
+<li><p>select 仅仅返回可读文件描述符的个数，具体哪个可读还是要用户自己遍历。（可优化为只返回给用户就绪的文件描述符，无需用户做无效的遍历）</p>
+</li>
+</ul>
+<ol start="2">
+<li>poll：</li>
+</ol>
+<ul>
+<li>与select类似，但是没有监听文件描述符个数的限制了</li>
+</ul>
+<ol start="3">
+<li>epoll</li>
+</ol>
+<ul>
+<li><p>epoll 主要就是针对这三点进行了改进。</p>
+</li>
+<li><ol>
+<li>内核中保存一份文件描述符集合，无需用户每次都重新传入，只需告诉内核修改的部分即可。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>内核不再通过轮询的方式找到就绪的文件描述符，而是通过异步 IO 事件唤醒。</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>内核仅会将有 IO 事件的文件描述符返回给用户，用户也无需遍历整个文件描述符集合<br><img src="https://raw.githubusercontent.com/Xander-xz/test/main/img/202411212227536.jpg" alt="aa.jpg"></li>
+</ol>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">用户态和内核态</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">内存泄漏和内存溢出</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">I/O多路复用</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/10/b019cdd33fe3.html">展开全文 >></a>
         </p>
       
 
@@ -864,6 +938,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">用户态和内核态</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">内存泄漏和内存溢出</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">I/O多路复用</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">测试tage</a>
